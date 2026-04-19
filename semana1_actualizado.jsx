@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Play, Info, Activity, AlertTriangle, CheckCircle, Database, Layout, PenTool, Layers, Sparkles, Loader2, MousePointerClick, RefreshCw, GitCommit, Settings } from 'lucide-react';
+import { Play, Info, Activity, AlertTriangle, CheckCircle, Database, Layout, PenTool, Layers, Sparkles, Loader2, MousePointerClick, RefreshCw, GitCommit, Sliders, PieChart, FileCode, SplitSquareHorizontal, Settings } from 'lucide-react';
 
 // --- COMPONENTES DE SIMULACIÓN ---
 
@@ -1031,6 +1031,67 @@ const Semana1Content = () => {
   );
 };
 
-export default function Semana1Page() {
-  return <Semana1Content />;
+// --- CONTENIDO PENDIENTE (SEMANAS 2-5) ---
+
+const PendingContent = ({ weekNumber }) => {
+  return (
+    <div className="max-w-4xl mx-auto py-24 px-4 text-center">
+      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-12 shadow-sm">
+        <Play className="w-16 h-16 text-slate-300 mx-auto mb-6" />
+        <h2 className="text-3xl font-bold text-slate-700 mb-4">Semana {weekNumber}</h2>
+        <p className="text-lg text-slate-500">
+          El contenido de esta semana estará disponible próximamente en tu avance del diplomado.
+        </p>
+        <p className="text-sm text-slate-400 mt-2">
+          Continúa interactuando y repasando los conceptos fundamentales de la Semana 1.
+        </p>
+      </div>
+    </div>
+  );
+};
+
+
+// --- APLICACIÓN PRINCIPAL CON NAVEGACIÓN ---
+
+export default function App() {
+  const [activeTab, setActiveTab] = useState(1);
+
+  const tabs = [
+    { id: 1, name: 'Semana 1' },
+    { id: 2, name: 'Semana 2' },
+    { id: 3, name: 'Semana 3' },
+    { id: 4, name: 'Semana 4' },
+    { id: 5, name: 'Semana 5 y 6' },
+  ];
+
+  return (
+    <div className="min-h-screen bg-slate-50 font-sans">
+      <nav className="bg-white shadow-sm sticky top-0 z-50 border-b border-slate-200">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex justify-between h-16">
+            <div className="flex space-x-1 sm:space-x-4 overflow-x-auto w-full items-center">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`
+                    whitespace-nowrap px-4 py-2 rounded-lg text-sm font-medium transition-colors
+                    ${activeTab === tab.id 
+                      ? 'bg-blue-600 text-white shadow-md' 
+                      : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'}
+                  `}
+                >
+                  {tab.name}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <main>
+        {activeTab === 1 ? <Semana1Content /> : <PendingContent weekNumber={activeTab} />}
+      </main>
+    </div>
+  );
 }

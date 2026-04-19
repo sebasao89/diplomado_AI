@@ -1,6 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Semana1Page from "../semana1.jsx";
 import Semana2Page from "../semana2.jsx";
+
+const TOTAL_WEEKS = 6;
+
+function getWeekFromPath(pathname) {
+  const match = pathname.match(/^\/semana\/(\d+)\/?$/);
+  if (!match) return 1;
+
+  const parsed = Number(match[1]);
+  if (!Number.isInteger(parsed)) return 1;
+
+  return parsed >= 1 && parsed <= TOTAL_WEEKS ? parsed : 1;
+}
 
 function PendingWeek({ weekNumber }) {
   return (
@@ -14,7 +26,34 @@ function PendingWeek({ weekNumber }) {
 }
 
 function App() {
-  const [activePage, setActivePage] = useState(1);
+  const [activePage, setActivePage] = useState(() => {
+    if (typeof window === "undefined") return 1;
+    return getWeekFromPath(window.location.pathname);
+  });
+
+  useEffect(() => {
+    const onPopState = () => {
+      setActivePage(getWeekFromPath(window.location.pathname));
+    };
+
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
+
+  useEffect(() => {
+    const canonicalPath = `/semana/${activePage}`;
+    if (window.location.pathname !== canonicalPath) {
+      window.history.replaceState({ week: activePage }, "", canonicalPath);
+    }
+  }, [activePage]);
+
+  const navigateToWeek = (week) => {
+    if (week === activePage) return;
+
+    const path = `/semana/${week}`;
+    window.history.pushState({ week }, "", path);
+    setActivePage(week);
+  };
 
   const tabs = [
     { id: 1, name: "Semana 1" },
@@ -38,7 +77,7 @@ function App() {
               <button
                 key={tab.id}
                 type="button"
-                onClick={() => setActivePage(tab.id)}
+                onClick={() => navigateToWeek(tab.id)}
                 className={`whitespace-nowrap rounded-lg px-4 py-2 text-sm font-semibold transition-colors ${
                   activePage === tab.id
                     ? "bg-blue-600 text-white"
