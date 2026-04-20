@@ -27,6 +27,7 @@ function App() {
     if (typeof window === "undefined") return 1;
     return getPageFromPath(window.location.pathname);
   });
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const onPopState = () => {
@@ -42,6 +43,9 @@ function App() {
     if (window.location.pathname !== canonicalPath) {
       window.history.replaceState({ week: activePage }, "", canonicalPath);
     }
+
+    // Keep the mobile drawer closed after navigation changes.
+    setIsMobileMenuOpen(false);
   }, [activePage]);
 
   const navigateToWeek = (week) => {
@@ -71,12 +75,22 @@ function App() {
   return (
     <div className="min-h-screen bg-slate-100">
       <header className="sticky top-0 z-[60] border-b border-slate-200 bg-white/95 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
           <h1 className="text-sm font-bold uppercase tracking-wide text-slate-700">
             Diplomado IA
           </h1>
 
-          <nav className="flex items-center gap-2 overflow-x-auto">
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+            aria-label="Abrir menu de navegacion"
+            aria-expanded={isMobileMenuOpen}
+            className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100 md:hidden"
+          >
+            Menu
+          </button>
+
+          <nav className="hidden items-center gap-2 md:flex">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
@@ -104,6 +118,38 @@ function App() {
             </button>
           </nav>
         </div>
+
+        {isMobileMenuOpen && (
+          <div className="border-t border-slate-200 bg-white px-4 py-3 md:hidden">
+            <nav className="grid grid-cols-2 gap-2">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => navigateToWeek(tab.id)}
+                  className={`rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${
+                    activePage === tab.id
+                      ? "bg-blue-600 text-white"
+                      : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                  }`}
+                >
+                  {tab.name}
+                </button>
+              ))}
+              <button
+                type="button"
+                onClick={navigateToMaterials}
+                className={`col-span-2 rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${
+                  activePage === MATERIALS_PAGE
+                    ? "bg-emerald-600 text-white"
+                    : "bg-emerald-100 text-emerald-800 hover:bg-emerald-200"
+                }`}
+              >
+                Materiales PDF
+              </button>
+            </nav>
+          </div>
+        )}
       </header>
 
       <main>
