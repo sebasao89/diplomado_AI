@@ -163,6 +163,77 @@ function Semana4Page() {
         </div>
       </section>
 
+      <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 className="mb-3 text-xl font-bold text-slate-800">Que es el lenguaje</h2>
+        <p className="text-sm leading-relaxed text-slate-700">
+          Un lenguaje es un conjunto potencialmente infinito de oraciones y sentencias de
+          palabras construidas mediante reglas gramaticales, foneticas y de significacion que
+          rigen el propio lenguaje.
+        </p>
+      </section>
+
+      <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 className="mb-4 text-xl font-bold text-slate-800">Tipos de Lenguaje</h2>
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+          <article className="rounded-xl border border-blue-200 bg-blue-50 p-4">
+            <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-bold uppercase tracking-wide text-blue-700">
+              01
+            </div>
+            <h3 className="mb-2 text-base font-bold text-blue-900">Lenguaje Natural</h3>
+            <p className="text-sm leading-relaxed text-blue-900/90">
+              Nace de manera espontanea por la necesidad de comunicarse.
+              Ejemplos: idiomas como ingles, espanol y chino.
+            </p>
+          </article>
+
+          <article className="rounded-xl border border-slate-300 bg-slate-100 p-4">
+            <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-bold uppercase tracking-wide text-slate-700">
+              02
+            </div>
+            <h3 className="mb-2 text-base font-bold text-slate-800">Lenguaje Formal</h3>
+            <p className="text-sm leading-relaxed text-slate-700">
+              Lenguajes creados para una situacion particular.
+              Ejemplos: matematico, logico, musical y programacion.
+            </p>
+          </article>
+
+          <article className="rounded-xl border border-indigo-200 bg-indigo-50 p-4">
+            <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-bold uppercase tracking-wide text-indigo-700">
+              03
+            </div>
+            <h3 className="mb-2 text-base font-bold text-indigo-900">Lenguaje Artificial</h3>
+            <p className="text-sm leading-relaxed text-indigo-900/90">
+              Lenguajes creados antes de ser usados por los parlantes,
+              como una mezcla de natural y formal.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 className="mb-4 text-xl font-bold text-slate-800">Que es el Preprocesamiento en NLP</h2>
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <div className="rounded-xl bg-blue-50 p-5 border border-blue-100">
+            <p className="mb-2 text-xs font-bold uppercase tracking-wide text-blue-700">Definicion</p>
+            <p className="text-sm leading-relaxed text-blue-950">
+              Transformacion de texto en un formato adecuado para su analisis.
+            </p>
+          </div>
+          <div className="rounded-xl bg-indigo-50 p-5 border border-indigo-100">
+            <p className="mb-2 text-xs font-bold uppercase tracking-wide text-indigo-700">Objetivo</p>
+            <p className="text-sm leading-relaxed text-indigo-950">
+              Tratar la interaccion entre los lenguajes humanos (lenguajes naturales) y los
+              dispositivos informaticos.
+            </p>
+          </div>
+        </div>
+        <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <p className="text-sm leading-relaxed text-slate-700">
+            Campo que combina la <strong>Informatica</strong>, la <strong>Inteligencia Artificial</strong> y la <strong>Lingüistica</strong>.
+          </p>
+        </div>
+      </section>
+
       <section className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
         <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
           <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-slate-800">
