@@ -42,6 +42,28 @@ function Semana6Page() {
     return "Optimizacion Bayesiana aprende de intentos previos y prioriza zonas prometedoras para reducir evaluaciones.";
   }, [searchMethod]);
 
+  const highlightText = (text) => {
+    const terms = ["Grid Search", "Random Search", "Optimizacion Bayesiana", "hiperparametros", "regularizacion", "L1", "L2", "lambda", "coeficientes", "sobreajuste", "generalizacion"];
+    const escapedTerms = terms
+      .slice()
+      .sort((a, b) => b.length - a.length)
+      .map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+
+    const pattern = new RegExp(`(${escapedTerms.join("|")})`, "gi");
+    const parts = String(text).split(pattern);
+
+    return parts.map((part, index) => {
+      const isHighlighted = terms.some((term) => term.toLowerCase() === part.toLowerCase());
+      if (!isHighlighted) return part;
+
+      return (
+        <span key={`${part}-${index}`} className="font-bold text-indigo-700">
+          {part}
+        </span>
+      );
+    });
+  };
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 text-left">
       <section className="rounded-3xl border border-slate-200 bg-gradient-to-br from-indigo-50 via-white to-emerald-50 p-8 shadow-sm">
@@ -81,7 +103,7 @@ function Semana6Page() {
             <p className="mb-1 flex items-center gap-2 text-sm font-bold text-slate-900">
               <Grid3X3 className="h-4 w-4" /> Grid Search
             </p>
-            <p className="text-xs text-slate-600">Cobertura completa del espacio definido.</p>
+            <p className="text-xs text-slate-600">{highlightText("Cobertura completa del espacio definido.")}</p>
           </button>
 
           <button
@@ -96,7 +118,7 @@ function Semana6Page() {
             <p className="mb-1 flex items-center gap-2 text-sm font-bold text-slate-900">
               <Shuffle className="h-4 w-4" /> Random Search
             </p>
-            <p className="text-xs text-slate-600">Muestreo inteligente en espacios grandes.</p>
+            <p className="text-xs text-slate-600">{highlightText("Muestreo inteligente en espacios grandes.")}</p>
           </button>
 
           <button
@@ -111,12 +133,12 @@ function Semana6Page() {
             <p className="mb-1 flex items-center gap-2 text-sm font-bold text-slate-900">
               <SlidersHorizontal className="h-4 w-4" /> Bayesiana
             </p>
-            <p className="text-xs text-slate-600">Prioriza regiones prometedoras.</p>
+            <p className="text-xs text-slate-600">{highlightText("Prioriza regiones prometedoras.")}</p>
           </button>
         </div>
 
         <div className="mt-5 rounded-xl border border-slate-200 bg-slate-50 p-4">
-          <p className="text-sm leading-relaxed text-slate-700">{methodSummary}</p>
+          <p className="text-sm leading-relaxed text-slate-700">{highlightText(methodSummary)}</p>
         </div>
       </section>
 
@@ -152,7 +174,7 @@ function Semana6Page() {
             </div>
 
             <label className="block text-xs font-bold uppercase tracking-wide text-slate-500">
-              Intensidad de regularizacion ($\\lambda$): {lambda.toFixed(1)}
+              {highlightText("Intensidad de regularizacion ($\\lambda$): ")}{lambda.toFixed(1)}
             </label>
             <input
               type="range"
@@ -191,19 +213,19 @@ function Semana6Page() {
             <ul className="space-y-3 text-xs leading-relaxed text-slate-700">
               <li className="flex items-start gap-2">
                 <BadgePercent className="mt-0.5 h-4 w-4 text-emerald-600" />
-                Mayor $\\lambda$ implica mayor penalizacion sobre los coeficientes.
+                {highlightText("Mayor $\\lambda$ implica mayor penalizacion sobre los coeficientes.")}
               </li>
               <li className="flex items-start gap-2">
                 <TrendingDown className="mt-0.5 h-4 w-4 text-amber-600" />
-                L1 tiende a llevar algunos pesos a cero (seleccion de variables).
+                {highlightText("L1 tiende a llevar algunos pesos a cero (seleccion de variables).")}
               </li>
               <li className="flex items-start gap-2">
                 <Scale className="mt-0.5 h-4 w-4 text-indigo-600" />
-                L2 reduce todos los pesos de forma suave, sin apagarlos por completo.
+                {highlightText("L2 reduce todos los pesos de forma suave, sin apagarlos por completo.")}
               </li>
               <li className="flex items-start gap-2">
                 <ShieldAlert className="mt-0.5 h-4 w-4 text-rose-600" />
-                El objetivo es controlar overfitting sin perder demasiada capacidad predictiva.
+                {highlightText("El objetivo es controlar sobreajuste sin perder demasiada capacidad predictiva.")}
               </li>
             </ul>
           </div>

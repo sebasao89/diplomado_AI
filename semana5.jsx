@@ -72,6 +72,7 @@ const SECTION_ORDER = [
     accent: "blue",
     summary:
       "Modela una salida continua mediante una relacion lineal entre variables independientes y dependientes.",
+    highlights: ["Regresion Lineal", "salida continua", "relacion lineal", "variables independientes", "dependientes"],
     advantages: [
       "Simple de entender y explicar.",
       "Rapida de entrenar.",
@@ -99,6 +100,7 @@ const SECTION_ORDER = [
     accent: "indigo",
     summary:
       "Se usa para clasificacion binaria y transforma una salida lineal en una probabilidad entre 0 y 1.",
+    highlights: ["Regresion Logistica", "clasificacion binaria", "probabilidad", "0 y 1", "hiperparametros", "regularizacion"],
     advantages: [
       "Entrega probabilidades interpretables.",
       "Muy util en decisiones binarias.",
@@ -122,21 +124,26 @@ const SECTION_ORDER = [
       {
         title: "Ajuste de hiperparametros",
         note:
-          "No es otro algoritmo: es la forma de elegir la mejor configuracion de la regresion logistica.",
+          "No es otro algoritmo: es la fase en la que defines como se comporta el modelo antes de medirlo con datos nuevos.",
         points: [
+          "Los hiperparametros no se aprenden directamente de los datos; se fijan antes o durante el proceso de busqueda.",
+          "Sirven para controlar la complejidad del modelo, su velocidad de convergencia y su capacidad de generalizar.",
           "Grid Search prueba todas las combinaciones.",
           "Random Search explora combinaciones aleatorias.",
           "Optimizacion bayesiana concentra la busqueda en zonas prometedoras.",
           "Validacion cruzada anidada ayuda a estimar mejor el rendimiento final.",
+          "En regresion logistica, esta busqueda ayuda a decidir valores como C, penalty, solver y max_iter.",
         ],
       },
       {
         title: "Regularizacion L1 y L2",
         note:
-          "Tampoco son algoritmos aparte: son tecnicas para controlar el sobreajuste dentro del modelo.",
+          "Tampoco son algoritmos aparte: son penalizaciones que se agregan a la funcion de costo para evitar sobreajuste.",
         points: [
+          "La idea general es castigar coeficientes muy grandes para que el modelo no memorice el ruido.",
           "L1 puede llevar coeficientes a cero y ayuda a seleccionar variables.",
           "L2 reduce la magnitud de los coeficientes y estabiliza el modelo.",
+          "La regularizacion se usa para mejorar la generalizacion cuando hay muchas variables o relaciones complejas.",
         ],
       },
     ],
@@ -149,6 +156,7 @@ const SECTION_ORDER = [
     accent: "emerald",
     summary:
       "Clasificador probabilistico que asume independencia entre caracteristicas.",
+    highlights: ["Naive Bayes", "probabilistico", "independencia", "caracteristicas"],
     advantages: [
       "Muy rapido y escalable.",
       "Funciona bien con texto.",
@@ -185,11 +193,112 @@ const SECTION_ORDER = [
       "Ejemplo: clasificar correos segun la frecuencia de palabras como oferta o gratis.",
   },
   {
+    id: "hyperparameter-theory",
+    title: "Teoria del ajuste de hiperparametros",
+    accent: "slate",
+    summary:
+      "La busqueda de hiperparametros define como se entrenara y ajustara el modelo para maximizar su rendimiento.",
+    highlights: ["hiperparametros", "maximizar", "rendimiento"],
+    advantages: [
+      "Permite encontrar configuraciones mas robustas.",
+      "Mejora la generalizacion del modelo.",
+      "Reduce el riesgo de usar parametros elegidos al azar.",
+    ],
+    uses: [
+      "Seleccion de la mejor configuracion de entrenamiento.",
+      "Comparacion entre varias variantes del mismo modelo.",
+      "Ajuste de C, penalty, solver y max_iter en modelos logisticos.",
+    ],
+    disadvantages: [
+      "Consume tiempo y recursos.",
+      "Puede requerir varios experimentos para obtener una buena respuesta.",
+    ],
+    whenNotUse: [
+      "Cuando el modelo ya esta validado y no necesitas explorar mas configuraciones.",
+      "Cuando el costo computacional es demasiado alto para una busqueda extensa.",
+    ],
+    nested: [
+      {
+        title: "Que se ajusta realmente",
+        note:
+          "Los hiperparametros no se aprenden como los pesos del modelo; son decisiones de diseño del entrenamiento.",
+        points: [
+          "Controlan la complejidad del modelo.",
+          "Influyen en la convergencia del entrenamiento.",
+          "Afectan directamente el balance entre sesgo y varianza.",
+        ],
+      },
+      {
+        title: "Formas comunes de busqueda",
+        note:
+          "Cada metodo explora el espacio de manera distinta: exhaustiva, aleatoria o guiada.",
+        points: [
+          "Grid Search: exhaustivo, pero costoso.",
+          "Random Search: mas economico cuando hay muchos parametros.",
+          "Bayesiana: aprovecha resultados anteriores para priorizar lo prometedor.",
+        ],
+      },
+    ],
+    example:
+      "Ejemplo: probar distintas combinaciones de parametros en regresion logistica para elegir la que mejor generaliza.",
+  },
+  {
+    id: "regularization-theory",
+    title: "Teoria de la regularizacion",
+    accent: "rose",
+    summary:
+      "La regularizacion agrega una penalizacion para evitar que el modelo se vuelva demasiado complejo y sobreajuste.",
+    highlights: ["regularizacion", "penalizacion", "sobreajuste"],
+    advantages: [
+      "Reduce el sobreajuste.",
+      "Ayuda a generalizar mejor.",
+      "Hace mas estable el entrenamiento.",
+    ],
+    uses: [
+      "Modelos con muchas variables.",
+      "Escenarios donde el ruido puede confundir al modelo.",
+      "Casos donde importa el control de complejidad.",
+    ],
+    disadvantages: [
+      "Si se aplica demasiado fuerte puede subajustar.",
+      "No reemplaza una buena seleccion de variables ni una buena validacion.",
+    ],
+    whenNotUse: [
+      "Cuando el modelo ya es muy simple y no hay riesgo real de sobreajuste.",
+      "Cuando necesitas interpretar los coeficientes sin alterar demasiado su magnitud.",
+    ],
+    nested: [
+      {
+        title: "Regularizacion L1",
+        note:
+          "La penalizacion L1 usa la suma de valores absolutos de los coeficientes y favorece soluciones esparsas.",
+        points: [
+          "Puede volver algunos coeficientes exactamente cero.",
+          "Sirve para seleccion de variables.",
+          "Es util cuando quieres simplificar el modelo.",
+        ],
+      },
+      {
+        title: "Regularizacion L2",
+        note:
+          "La penalizacion L2 usa la suma de cuadrados de los coeficientes y los reduce sin anularlos por completo.",
+        points: [
+          "Mantiene todas las variables, pero con pesos mas pequeños.",
+          "Es util cuando hay multicolinealidad.",
+          "Suele ser mas estable numericamente.",
+        ],
+      },
+    ],
+    example:
+      "Ejemplo: reducir la complejidad de un modelo de clasificacion para que no memorice el ruido.",
+  },
+  {
     id: "svm",
     title: "Maquinas de Vectores de Soporte (SVM)",
     accent: "violet",
     summary:
       "Busca el hiperplano que separa mejor las clases maximizando el margen entre ellas.",
+    highlights: ["hiperplano", "maximizando el margen", "clases"],
     advantages: [
       "Muy fuerte en alta dimensionalidad.",
       "Puede usar kernels para fronteras no lineales.",
@@ -218,6 +327,7 @@ const SECTION_ORDER = [
     accent: "amber",
     summary:
       "Clasifica un punto por la mayoria de sus vecinos mas cercanos en el espacio de caracteristicas.",
+    highlights: ["vecinos mas cercanos", "espacio de caracteristicas"],
     advantages: [
       "Muy simple e intuitivo.",
       "No requiere entrenamiento pesado.",
@@ -247,6 +357,7 @@ const SECTION_ORDER = [
     accent: "slate",
     summary:
       "Divide recursivamente los datos en reglas hasta llegar a una prediccion final en las hojas.",
+    highlights: ["reglas", "prediccion final", "hojas"],
     advantages: [
       "Muy interpretable.",
       "Permite reglas claras de decision.",
@@ -274,6 +385,7 @@ const SECTION_ORDER = [
     accent: "cyan",
     summary:
       "Cierra el bloque comparando rapidamente donde destaca cada tecnica y donde conviene evitarla.",
+    highlights: ["Comparacion final", "tecnica", "evitarla"],
     advantages: [
       "Ayuda a elegir mejor segun el contexto.",
       "Resume fortalezas y limites de cada tecnica.",
@@ -309,20 +421,45 @@ function SectionCard({ section }) {
     cyan: "border-cyan-200 bg-cyan-50 text-cyan-900",
   };
 
+  const highlightTerms = section.highlights || [];
+
+  const highlightText = (text) => {
+    if (!highlightTerms.length) return text;
+
+    const escapedTerms = highlightTerms
+      .slice()
+      .sort((a, b) => b.length - a.length)
+      .map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+
+    const pattern = new RegExp(`(${escapedTerms.join("|")})`, "gi");
+    const parts = String(text).split(pattern);
+
+    return parts.map((part, index) => {
+      const isHighlighted = highlightTerms.some((term) => term.toLowerCase() === part.toLowerCase());
+      if (!isHighlighted) return part;
+
+      return (
+        <span key={`${part}-${index}`} className="font-bold text-cyan-700">
+          {part}
+        </span>
+      );
+    });
+  };
+
   return (
     <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
       <div className={`mb-3 inline-flex rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] ${accentStyles[section.accent]}`}>
         Tema de estudio
       </div>
       <h3 className="text-2xl font-black text-slate-900">{section.title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-slate-600">{section.summary}</p>
+      <p className="mt-2 text-sm leading-relaxed text-slate-600">{highlightText(section.summary)}</p>
 
       <div className="mt-5 grid grid-cols-1 gap-4 lg:grid-cols-2">
         <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
           <p className="mb-2 text-xs font-bold uppercase tracking-wide text-slate-500">Ventajas</p>
           <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed text-slate-700">
             {section.advantages.map((item) => (
-              <li key={item}>{item}</li>
+                <li key={item}>{highlightText(item)}</li>
             ))}
           </ul>
         </div>
@@ -331,7 +468,7 @@ function SectionCard({ section }) {
           <p className="mb-2 text-xs font-bold uppercase tracking-wide text-slate-500">Usos</p>
           <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed text-slate-700">
             {section.uses.map((item) => (
-              <li key={item}>{item}</li>
+                <li key={item}>{highlightText(item)}</li>
             ))}
           </ul>
         </div>
@@ -340,7 +477,7 @@ function SectionCard({ section }) {
           <p className="mb-2 text-xs font-bold uppercase tracking-wide text-slate-500">Desventajas</p>
           <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed text-slate-700">
             {section.disadvantages.map((item) => (
-              <li key={item}>{item}</li>
+                <li key={item}>{highlightText(item)}</li>
             ))}
           </ul>
         </div>
@@ -349,7 +486,7 @@ function SectionCard({ section }) {
           <p className="mb-2 text-xs font-bold uppercase tracking-wide opacity-80">Cuando no usarlo</p>
           <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed">
             {section.whenNotUse.map((item) => (
-              <li key={item}>{item}</li>
+                <li key={item}>{highlightText(item)}</li>
             ))}
           </ul>
         </div>
@@ -360,10 +497,10 @@ function SectionCard({ section }) {
           {section.nested.map((nestedSection) => (
             <div key={nestedSection.title} className="rounded-xl border border-slate-200 bg-slate-50 p-4">
               <h4 className="text-base font-bold text-slate-900">{nestedSection.title}</h4>
-              <p className="mt-1 text-sm leading-relaxed text-slate-600">{nestedSection.note}</p>
+              <p className="mt-1 text-sm leading-relaxed text-slate-600">{highlightText(nestedSection.note)}</p>
               <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-slate-700">
                 {nestedSection.points.map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item}>{highlightText(item)}</li>
                 ))}
               </ul>
             </div>
@@ -373,7 +510,7 @@ function SectionCard({ section }) {
 
       <div className={`mt-5 rounded-xl border p-4 ${accentStyles[section.accent]}`}>
         <p className="mb-2 text-xs font-bold uppercase tracking-wide opacity-80">Ejemplo</p>
-        <p className="text-sm leading-relaxed">{section.example}</p>
+        <p className="text-sm leading-relaxed">{highlightText(section.example)}</p>
       </div>
     </article>
   );
