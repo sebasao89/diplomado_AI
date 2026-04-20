@@ -7,6 +7,7 @@ dist/
 
 # Materials (PDF classes)
 *.pdf
+!public/pdfs/*.pdf
 !public/pdfs/.gitkeep
 !public/pdfs/COPIA_TUS_PDF_AQUI.txt
 

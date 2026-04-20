@@ -8,8 +8,9 @@ public/pdfs/
 
 Notas:
 
-- Los archivos .pdf estan ignorados por Git para no subir material pesado.
-- La carpeta public/pdfs se mantiene en el repositorio con archivos guia.
+- Se esta usando Camino A: los PDF dentro de public/pdfs SI se versionan en Git.
+- Los PDF fuera de public/pdfs siguen ignorados.
+- Al hacer deploy, estos archivos se publican como estaticos.
 - Ejemplo de ruta publica para enlazar un PDF en la app:
 
 	/pdfs/Semana 4.pdf

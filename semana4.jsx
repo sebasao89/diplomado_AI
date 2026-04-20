@@ -10,6 +10,8 @@ import {
   Hash,
   BarChart3,
   Tags,
+  ExternalLink,
+  Download,
 } from "lucide-react";
 
 const SPANISH_STOPWORDS = new Set([
@@ -318,6 +320,36 @@ function Semana4Page() {
         <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
           <h4 className="mb-2 flex items-center gap-2 text-sm font-bold text-slate-800"><Tags className="h-4 w-4 text-amber-600" /> Casos de Uso</h4>
           <p className="text-xs text-slate-600">Chatbots, analisis de sentimiento, busqueda, clasificacion y Q&A.</p>
+        </div>
+      </section>
+
+      <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h3 className="mb-4 text-lg font-bold text-slate-800">Material PDF del Diplomado</h3>
+        <p className="mb-4 text-sm text-slate-600">
+          Documento de soporte para esta semana y acceso al repositorio completo de materiales.
+        </p>
+        <div className="flex flex-wrap gap-2">
+          <a
+            href="/pdfs/Semana 4.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1 rounded-lg bg-cyan-600 px-3 py-2 text-xs font-semibold text-white hover:bg-cyan-700"
+          >
+            <ExternalLink className="h-4 w-4" /> Abrir PDF Semana 4
+          </a>
+          <a
+            href="/pdfs/Semana 4.pdf"
+            download
+            className="inline-flex items-center gap-1 rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+          >
+            <Download className="h-4 w-4" /> Descargar
+          </a>
+          <a
+            href="/materiales"
+            className="inline-flex items-center gap-1 rounded-lg border border-emerald-300 bg-emerald-50 px-3 py-2 text-xs font-semibold text-emerald-700 hover:bg-emerald-100"
+          >
+            Ver todos los PDF
+          </a>
         </div>
       </section>
 

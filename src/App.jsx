@@ -3,10 +3,14 @@ import Semana1Page from "../semana1.jsx";
 import Semana2Page from "../semana2.jsx";
 import Semana3Page from "../semana3.jsx";
 import Semana4Page from "../semana4.jsx";
+import MaterialesPDFPage from "../materialesPDF.jsx";
 
 const TOTAL_WEEKS = 6;
+const MATERIALS_PAGE = 0;
 
-function getWeekFromPath(pathname) {
+function getPageFromPath(pathname) {
+  if (/^\/materiales\/?$/.test(pathname)) return MATERIALS_PAGE;
+
   const match = pathname.match(/^\/semana\/(\d+)\/?$/);
   if (!match) return 1;
 
@@ -30,12 +34,12 @@ function PendingWeek({ weekNumber }) {
 function App() {
   const [activePage, setActivePage] = useState(() => {
     if (typeof window === "undefined") return 1;
-    return getWeekFromPath(window.location.pathname);
+    return getPageFromPath(window.location.pathname);
   });
 
   useEffect(() => {
     const onPopState = () => {
-      setActivePage(getWeekFromPath(window.location.pathname));
+      setActivePage(getPageFromPath(window.location.pathname));
     };
 
     window.addEventListener("popstate", onPopState);
@@ -43,7 +47,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const canonicalPath = `/semana/${activePage}`;
+    const canonicalPath = activePage === MATERIALS_PAGE ? "/materiales" : `/semana/${activePage}`;
     if (window.location.pathname !== canonicalPath) {
       window.history.replaceState({ week: activePage }, "", canonicalPath);
     }
@@ -55,6 +59,13 @@ function App() {
     const path = `/semana/${week}`;
     window.history.pushState({ week }, "", path);
     setActivePage(week);
+  };
+
+  const navigateToMaterials = () => {
+    if (activePage === MATERIALS_PAGE) return;
+
+    window.history.pushState({ page: "materiales" }, "", "/materiales");
+    setActivePage(MATERIALS_PAGE);
   };
 
   const tabs = [
@@ -89,11 +100,23 @@ function App() {
                 {tab.name}
               </button>
             ))}
+            <button
+              type="button"
+              onClick={navigateToMaterials}
+              className={`whitespace-nowrap rounded-lg px-4 py-2 text-sm font-semibold transition-colors ${
+                activePage === MATERIALS_PAGE
+                  ? "bg-emerald-600 text-white"
+                  : "bg-emerald-100 text-emerald-800 hover:bg-emerald-200"
+              }`}
+            >
+              Materiales PDF
+            </button>
           </nav>
         </div>
       </header>
 
       <main>
+        {activePage === MATERIALS_PAGE && <MaterialesPDFPage />}
         {activePage === 1 && <Semana1Page />}
         {activePage === 2 && <Semana2Page />}
         {activePage === 3 && <Semana3Page />}

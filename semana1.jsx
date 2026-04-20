@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Play, Info, Activity, AlertTriangle, CheckCircle, Database, Layout, PenTool, Layers, Sparkles, Loader2, MousePointerClick, RefreshCw, GitCommit, Settings } from 'lucide-react';
+import { Play, Info, Activity, AlertTriangle, CheckCircle, Database, Layout, PenTool, Layers, Sparkles, Loader2, MousePointerClick, RefreshCw, GitCommit, Settings, ExternalLink, Download } from 'lucide-react';
 
 // --- COMPONENTES DE SIMULACIÓN ---
 
@@ -1024,6 +1024,36 @@ const Semana1Content = () => {
               </ul>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mt-8">
+        <h3 className="text-lg font-bold text-slate-800 mb-3">Material PDF del Diplomado</h3>
+        <p className="text-sm text-slate-600 mb-4">
+          Documento de soporte para esta semana y acceso al repositorio completo de materiales.
+        </p>
+        <div className="flex flex-wrap gap-2">
+          <a
+            href="/pdfs/Semana 1.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-2 text-xs font-semibold text-white hover:bg-blue-700"
+          >
+            <ExternalLink className="w-4 h-4" /> Abrir PDF Semana 1
+          </a>
+          <a
+            href="/pdfs/Semana 1.pdf"
+            download
+            className="inline-flex items-center gap-1 rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+          >
+            <Download className="w-4 h-4" /> Descargar
+          </a>
+          <a
+            href="/materiales"
+            className="inline-flex items-center gap-1 rounded-lg border border-emerald-300 bg-emerald-50 px-3 py-2 text-xs font-semibold text-emerald-700 hover:bg-emerald-100"
+          >
+            Ver todos los PDF
+          </a>
         </div>
       </section>
 
