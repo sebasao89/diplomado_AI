@@ -67,7 +67,7 @@ const PerceptronSimulator = () => {
 
         <div className="flex flex-col justify-center items-center bg-white p-6 rounded-lg shadow-sm border border-slate-100">
           <div className="w-full mb-6 p-4 bg-slate-50 rounded-lg font-mono text-sm border border-slate-200">
-            <div className="text-slate-500 mb-1 text-xs uppercase tracking-wider">Cálculo Interno ($\Sigma$):</div>
+            <div className="text-slate-500 mb-1 text-xs uppercase tracking-wider">Calculo interno (Sigma):</div>
             <div className="flex flex-wrap items-center gap-1">
               <span>(</span><span className="text-blue-600">{x1.toFixed(1)}</span>
               <span>*</span><span className="text-indigo-600">{w1.toFixed(1)}</span><span>)</span>
