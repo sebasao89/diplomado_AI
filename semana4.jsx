@@ -579,6 +579,27 @@ function Semana4Page() {
           Compara como cambian tokens, BoW y n-gramas para fortalecer intuicion antes de entrenar modelos.
         </p>
       </section>
+
+      <section className="mt-8 rounded-2xl border border-cyan-100 bg-gradient-to-br from-cyan-50 via-white to-slate-50 p-6 shadow-sm">
+        <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-cyan-100 px-3 py-1 text-xs font-bold uppercase tracking-wide text-cyan-800">
+          <Sparkles className="h-4 w-4" /> Conclusiones
+        </div>
+        <h3 className="mb-3 text-xl font-bold text-slate-900">
+          Relacion con las semanas anteriores y cierre de la Semana 4
+        </h3>
+        <p className="text-sm leading-relaxed text-slate-700">
+          El preprocesamiento general de las semanas anteriores prepara datos crudos para que puedan ser analizados
+          o usados por un modelo. En esta semana, ese mismo principio se aplica al texto: el preprocesamiento en NLP
+          transforma lenguaje natural en una forma util para la maquina mediante normalizacion, tokenizacion,
+          eliminacion de ruido, lematizacion, stemming y representaciones como Bag of Words y n-gramas.
+        </p>
+        <p className="mt-3 text-sm leading-relaxed text-slate-700">
+          En conclusion, no son dos temas distintos sino dos niveles del mismo proceso: primero se prepara la
+          informacion en general y luego se especializa esa preparacion para el lenguaje. Asi, la Semana 4 cierra el
+          recorrido mostrando como el NLP actua como puente entre la comunicacion humana y el analisis
+          computacional.
+        </p>
+      </section>
     </div>
   );
 }
