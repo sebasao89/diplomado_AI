@@ -210,6 +210,61 @@ function Semana5Page() {
       </section>
 
       <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 className="mb-2 text-xl font-bold text-slate-800">Tipos de problemas y algoritmos categorizados</h2>
+        <p className="mb-5 text-sm leading-relaxed text-slate-600">
+          Primero defines el objetivo del problema y luego eliges el algoritmo adecuado. Aunque
+          algunos nombres se parezcan, problema y algoritmo no son lo mismo.
+        </p>
+
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <article className="rounded-2xl border border-blue-100 bg-blue-50 p-5">
+            <p className="mb-2 text-xs font-bold uppercase tracking-wide text-blue-700">Tipos de problemas</p>
+            <div className="space-y-4">
+              <div className="rounded-xl border border-white bg-white p-4 shadow-sm">
+                <h3 className="mb-1 text-sm font-bold text-blue-900">Clasificacion</h3>
+                <p className="text-xs leading-relaxed text-blue-900/90">
+                  Se usa cuando quieres asignar una etiqueta o clase. Ejemplos: spam/no spam,
+                  positivo/negativo, aprobado/reprobado.
+                </p>
+              </div>
+              <div className="rounded-xl border border-white bg-white p-4 shadow-sm">
+                <h3 className="mb-1 text-sm font-bold text-blue-900">Regresion</h3>
+                <p className="text-xs leading-relaxed text-blue-900/90">
+                  Se usa cuando quieres predecir un valor numerico continuo. Ejemplos: precio,
+                  ventas, temperatura o demanda.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article className="rounded-2xl border border-emerald-100 bg-emerald-50 p-5">
+            <p className="mb-2 text-xs font-bold uppercase tracking-wide text-emerald-700">Algoritmos categorizados</p>
+            <div className="space-y-4">
+              <div className="rounded-xl border border-white bg-white p-4 shadow-sm">
+                <h3 className="mb-1 text-sm font-bold text-emerald-900">Para clasificacion</h3>
+                <p className="text-xs leading-relaxed text-emerald-900/90">
+                  Regresion Logistica, Naive Bayes, SVM, K-NN y Arboles de Decision.
+                </p>
+              </div>
+              <div className="rounded-xl border border-white bg-white p-4 shadow-sm">
+                <h3 className="mb-1 text-sm font-bold text-emerald-900">Para regresion</h3>
+                <p className="text-xs leading-relaxed text-emerald-900/90">
+                  Regresion Lineal y, segun el caso, Arboles de Decision en modo regresion.
+                </p>
+              </div>
+              <div className="rounded-xl border border-white bg-white p-4 shadow-sm">
+                <h3 className="mb-1 text-sm font-bold text-emerald-900">Nombre parecido, uso distinto</h3>
+                <p className="text-xs leading-relaxed text-emerald-900/90">
+                  Regresion Logistica se llama asi por su formulacion matematica, pero se usa para
+                  clasificacion. Por eso el nombre no siempre coincide con el tipo de problema.
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <h2 className="mb-4 text-xl font-bold text-slate-800">Mapa de algoritmos</h2>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
           {ALGORITHMS.map(({ key, title, icon: Icon, strengths, risks }) => (
