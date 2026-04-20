@@ -120,6 +120,24 @@ function Semana5Page() {
               En esta semana trabajamos algoritmos clasicos para clasificacion y regresion,
               incluyendo fortalezas, limites y contexto de uso.
             </p>
+
+            <div className="mt-4 max-w-4xl rounded-2xl border border-blue-200 bg-blue-50 p-4">
+              <p className="mb-2 text-xs font-bold uppercase tracking-wide text-blue-700">Definicion</p>
+              <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed text-blue-950">
+                <li>
+                  Se define como el uso de datos <strong>etiquetados</strong> para entrenar algoritmos
+                  que <strong>clasifican</strong> los datos o <strong>predicen</strong> resultados.
+                </li>
+                <li>
+                  El aprendizaje supervisado utiliza varios conjuntos de datos necesarios para que el
+                  modelo funcione, como los datos de entrenamiento.
+                </li>
+                <li>
+                  Estos datos permiten ajustar los parametros del modelo hasta minimizar lo suficiente
+                  la funcion de perdida.
+                </li>
+              </ul>
+            </div>
           </div>
           <div className="rounded-2xl border border-cyan-200 bg-white p-4">
             <p className="text-xs font-bold uppercase tracking-wide text-cyan-700">Objetivo</p>
