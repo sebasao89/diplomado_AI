@@ -700,7 +700,6 @@ const Semana1Content = () => {
                      <li><strong>Predicción de precios:</strong> Estimar el valor de una vivienda.</li>
                      <li><strong>Detección de fraudes:</strong> Identificar transacciones inusuales en tiempo real.</li>
                    </ul>
-                   <GeminiExamplesGenerator />
                 </div>
                 <div className="flex flex-col items-center justify-center p-4 space-y-4">
                    <div className="p-5 bg-white border-2 border-red-300 rounded-lg w-full shadow-md relative overflow-hidden">
