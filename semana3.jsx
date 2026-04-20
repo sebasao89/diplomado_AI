@@ -614,8 +614,9 @@ const Semana3Content = () => (
       {/* 5. MATRIZ DE CONFUSIÓN */}
       <section className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 space-y-8 text-left">
         <div className="flex items-center gap-3 mb-2 px-2 text-left">
-          <span className="bg-indigo-600 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shadow-md">Sección 5</span>
-          <h2 className="text-3xl font-black text-slate-900">Matriz de Confusión</h2>
+          <h3 className="text-2xl font-black text-slate-800 flex items-center gap-2">
+            5. Matriz de Confusión
+          </h3>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8 items-start text-left">
@@ -735,8 +736,9 @@ const Semana3Content = () => (
       {/* 6. CURVA ROC Y AUC */}
       <section className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 space-y-12 text-left">
         <div className="flex items-center gap-3 mb-2 px-2 text-left">
-          <span className="bg-purple-600 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shadow-md">Sección 6</span>
-          <h2 className="text-3xl font-black text-slate-900">Curva ROC y AUC</h2>
+          <h3 className="text-2xl font-black text-slate-800 flex items-center gap-2">
+            6. Curva ROC y AUC
+          </h3>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8 items-start">
