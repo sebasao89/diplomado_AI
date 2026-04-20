@@ -65,6 +65,51 @@ const ALGORITHMS = [
   },
 ];
 
+const SIMULATOR_GUIDES = {
+  linear: {
+    title: "Regresion Lineal",
+    tune: ["Revisar outliers y relaciones no lineales antes de ajustar.", "Si la varianza es alta, comparar con regularizacion o transformaciones."],
+    hyperparameters: ["No suele tener una busqueda tan amplia como otros modelos, pero si se puede comparar variantes y transformaciones."],
+    regularization: ["Cuando la relacion es inestable, considerar Ridge/L2 para estabilizar coeficientes."],
+    warning: "No conviene si la relacion es claramente no lineal o si la variable objetivo no es continua.",
+  },
+  logistic: {
+    title: "Regresion Logistica",
+    tune: ["Ajustar C para controlar la fuerza de la regularizacion.", "Probar penalty compatible con el solver.", "Definir max_iter suficiente para converger."],
+    hyperparameters: ["C, penalty, solver y max_iter son los parametros mas utiles para explorar."],
+    regularization: ["L1 ayuda a seleccionar variables; L2 estabiliza el modelo y reduce sobreajuste."],
+    warning: "No conviene usarla como primera opcion si la frontera de decision es muy compleja sin transformaciones.",
+  },
+  naive_bayes: {
+    title: "Naive Bayes",
+    tune: ["Elegir la variante segun el tipo de dato.", "En texto, trabajar con conteos o frecuencias suele dar mejores resultados."],
+    hyperparameters: ["El ajuste suele centrarse mas en la variante correcta que en una busqueda extensa de parametros."],
+    regularization: ["Normalmente no se trabaja como en modelos lineales; lo importante es la representacion y la variante correcta."],
+    warning: "No conviene si las variables estan fuertemente correlacionadas y esa dependencia es esencial.",
+  },
+  svm: {
+    title: "SVM",
+    tune: ["Elegir kernel segun la separabilidad del problema.", "Ajustar C para balancear margen y errores.", "Probar gamma cuando se usan kernels no lineales."],
+    hyperparameters: ["Kernel, C y gamma suelen ser los ajustes mas importantes."],
+    regularization: ["C controla el trade-off entre margen amplio y error de clasificacion."],
+    warning: "No es la mejor opcion si necesitas entrenamiento muy rapido en datasets enormes.",
+  },
+  knn: {
+    title: "K-NN",
+    tune: ["Elegir k cuidadosamente.", "Normalizar las variables antes de calcular distancias.", "Probar distintas metricas de distancia si aplica."],
+    hyperparameters: ["k es el ajuste principal y define cuanta suavidad tiene la decision."],
+    regularization: ["No usa regularizacion clasica; su control real viene del valor de k y de la escala de los datos."],
+    warning: "No conviene con datasets muy grandes o con demasiadas dimensiones.",
+  },
+  tree: {
+    title: "Arbol de Decision",
+    tune: ["Limitar profundidad maxima.", "Usar poda si el arbol crece demasiado.", "Ajustar el criterio de division si hace falta."],
+    hyperparameters: ["max_depth, min_samples_split y min_samples_leaf son parametros clave."],
+    regularization: ["El control del sobreajuste se logra con poda y limites de profundidad, no con L1/L2 clasicos."],
+    warning: "No conviene dejarlo crecer sin control porque sobreajusta con facilidad.",
+  },
+};
+
 const SECTION_ORDER = [
   {
     id: "linear-regression",
@@ -549,6 +594,8 @@ function Semana5Page() {
     [problemType, datasetSize, priority]
   );
 
+  const simulatorGuide = SIMULATOR_GUIDES[recommendation.key];
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 text-left">
       <section className="rounded-3xl border border-slate-200 bg-gradient-to-br from-cyan-50 via-white to-blue-50 p-8 shadow-sm">
@@ -781,6 +828,43 @@ function Semana5Page() {
             Recomendacion orientativa basada en criterios del tema.
           </p>
         </div>
+
+        {simulatorGuide && (
+          <div className="mt-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500">Siguiente paso</p>
+            <h3 className="mt-2 text-lg font-black text-slate-900">{simulatorGuide.title}</h3>
+            <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
+              <div className="rounded-xl border border-blue-100 bg-blue-50 p-4">
+                <p className="mb-2 text-xs font-bold uppercase tracking-wide text-blue-700">Que ajustar</p>
+                <ul className="list-disc space-y-2 pl-5 text-xs leading-relaxed text-blue-950">
+                  {simulatorGuide.tune.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="rounded-xl border border-indigo-100 bg-indigo-50 p-4">
+                <p className="mb-2 text-xs font-bold uppercase tracking-wide text-indigo-700">Hiperparametros / control</p>
+                <ul className="list-disc space-y-2 pl-5 text-xs leading-relaxed text-indigo-950">
+                  {simulatorGuide.hyperparameters.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="rounded-xl border border-rose-100 bg-rose-50 p-4">
+                <p className="mb-2 text-xs font-bold uppercase tracking-wide text-rose-700">Cuando evitarlo</p>
+                <p className="text-xs leading-relaxed text-rose-950">{simulatorGuide.warning}</p>
+              </div>
+            </div>
+            <div className="mt-4 rounded-xl border border-emerald-100 bg-emerald-50 p-4">
+              <p className="mb-2 text-xs font-bold uppercase tracking-wide text-emerald-700">Regularizacion / control de complejidad</p>
+              <ul className="list-disc space-y-2 pl-5 text-xs leading-relaxed text-emerald-950">
+                {simulatorGuide.regularization.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
       </section>
     </div>
   );
