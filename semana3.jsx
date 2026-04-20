@@ -730,6 +730,16 @@ const Semana3Content = () => (
            </div>
         </div>
 
+        <div className="bg-indigo-50 border border-indigo-200 rounded-2xl p-4 text-left">
+          <div className="flex items-center justify-between gap-3">
+            <span className="bg-indigo-600 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Simulador Parte 1 · 1 de 2</span>
+            <span className="text-[10px] font-black uppercase tracking-widest text-indigo-700">Matriz de Confusión</span>
+          </div>
+          <p className="text-xs text-indigo-800 mt-2">
+            Ajusta TP, TN, FP y FN para ver en tiempo real cómo cambian Accuracy, Precision, Recall y F1-Score.
+          </p>
+        </div>
+
         <ConfusionMatrixSimulator />
       </section>
 
@@ -797,6 +807,16 @@ const Semana3Content = () => (
               </table>
             </div>
           </div>
+        </div>
+
+        <div className="bg-purple-50 border border-purple-200 rounded-2xl p-4 text-left">
+          <div className="flex items-center justify-between gap-3">
+            <span className="bg-purple-600 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Simulador Parte 1 · 2 de 2</span>
+            <span className="text-[10px] font-black uppercase tracking-widest text-purple-700">Curva ROC y Umbral</span>
+          </div>
+          <p className="text-xs text-purple-800 mt-2">
+            Mueve el umbral de decisión para observar el impacto en TPR, FPR y la posición del punto en la curva ROC.
+          </p>
         </div>
 
         {/* SIMULADOR GRÁFICO */}
@@ -1084,6 +1104,16 @@ const Semana3Content = () => (
           </div>
         </div>
       </section>
+
+      <div className="bg-rose-50 border border-rose-200 rounded-2xl p-4 text-left">
+        <div className="flex items-center justify-between gap-3">
+          <span className="bg-rose-600 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Simulador Parte 2 · 1 de 1</span>
+          <span className="text-[10px] font-black uppercase tracking-widest text-rose-700">Métricas de Regresión</span>
+        </div>
+        <p className="text-xs text-rose-800 mt-2">
+          Modifica el error de una observación y compara la sensibilidad de MAE, MSE, RMSE y R².
+        </p>
+      </div>
 
       <RegressionMetricsSimulator />
 
