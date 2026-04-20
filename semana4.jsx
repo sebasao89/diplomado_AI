@@ -311,7 +311,7 @@ function Semana4Page() {
       </section>
 
       <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
+        <div className="flex flex-col gap-6">
           <article className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-3 text-xl font-bold text-slate-800">Donde se puede encontrar</h2>
             <p className="mb-4 text-sm text-slate-600">
@@ -335,6 +335,9 @@ function Semana4Page() {
           </article>
 
           <article className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+            <div className="mb-3 inline-flex rounded-full bg-slate-900 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-white">
+              Paso siguiente
+            </div>
             <h2 className="mb-3 text-xl font-bold text-slate-800">Conceptos para el NLP</h2>
             <p className="mb-4 text-sm text-slate-600">
               Son las piezas base que convierten texto libre en representaciones utiles para analizar y modelar.
@@ -367,11 +370,22 @@ function Semana4Page() {
         </div>
       </section>
 
-      <section className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-slate-800">
-            <BookText className="h-5 w-5 text-cyan-600" /> Laboratorio de Texto
+      <section className="mt-8 space-y-6">
+        <div className="rounded-2xl border border-cyan-100 bg-gradient-to-r from-cyan-50 via-white to-sky-50 px-5 py-5 shadow-sm">
+          <p className="mb-1 text-[11px] font-bold uppercase tracking-[0.2em] text-cyan-700">Modulo interactivo</p>
+          <h2 className="flex items-center gap-3 text-2xl font-black tracking-tight text-slate-900">
+            <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-cyan-600 text-white shadow-sm">
+              <BookText className="h-5 w-5" />
+            </span>
+            Laboratorio de Texto
           </h2>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-600">
+            Experimenta con el pipeline de preprocesamiento y observa como cambian los resultados paso a paso.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
 
           <label className="mb-2 block text-xs font-bold uppercase tracking-wide text-slate-500">
             Texto de entrada (corpus mini)
@@ -435,6 +449,7 @@ function Semana4Page() {
             </div>
           </div>
         </article>
+        </div>
       </section>
 
       <section className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
