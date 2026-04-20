@@ -110,6 +110,51 @@ const SIMULATOR_GUIDES = {
   },
 };
 
+const COMPARISON_TABLE = [
+  {
+    algorithm: "Regresion Lineal",
+    problemType: "Regresion",
+    advantages: "Simple y rapido",
+    disadvantages: "Sensible a outliers",
+  },
+  {
+    algorithm: "Regresion Logistica",
+    problemType: "Clasificacion",
+    advantages: "Probabilistico",
+    disadvantages: "Solo para problemas binarios",
+  },
+  {
+    algorithm: "Naive Bayes",
+    problemType: "Clasificacion",
+    advantages: "Eficiente con datos grandes",
+    disadvantages: "Asume independencia entre features",
+  },
+  {
+    algorithm: "SVM",
+    problemType: "Clasificacion/Regresion",
+    advantages: "Efectivo en espacios de alta dimension",
+    disadvantages: "Lento con grandes datasets",
+  },
+  {
+    algorithm: "K-NN",
+    problemType: "Clasificacion/Regresion",
+    advantages: "Simple de implementar",
+    disadvantages: "Costoso computacionalmente",
+  },
+  {
+    algorithm: "Random Forest",
+    problemType: "Clasificacion/Regresion",
+    advantages: "Reduce sobreajuste",
+    disadvantages: "Menos interpretable",
+  },
+  {
+    algorithm: "Redes Neuronales",
+    problemType: "Clasificacion/Regresion",
+    advantages: "Alta precision en problemas complejos",
+    disadvantages: "Requiere muchos datos y recursos",
+  },
+];
+
 const SECTION_ORDER = [
   {
     id: "linear-regression",
@@ -490,6 +535,47 @@ function SectionCard({ section }) {
       );
     });
   };
+
+  if (section.id === "comparison") {
+    return (
+      <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div className={`mb-3 inline-flex rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] ${accentStyles[section.accent]}`}>
+          Tema de estudio
+        </div>
+        <h3 className="text-2xl font-black text-slate-900">Comparacion de Algoritmos</h3>
+        <p className="mt-2 text-sm leading-relaxed text-slate-600">
+          Resumen final para contrastar tipo de problema, ventajas y limites de cada enfoque.
+        </p>
+
+        <div className="mt-5 overflow-x-auto rounded-xl border border-slate-200">
+          <table className="min-w-full border-collapse text-left text-sm text-slate-700">
+            <thead className="bg-slate-100 text-slate-800">
+              <tr>
+                <th className="px-4 py-3 font-bold">Algoritmo</th>
+                <th className="px-4 py-3 font-bold">Tipo de Problema</th>
+                <th className="px-4 py-3 font-bold">Ventajas</th>
+                <th className="px-4 py-3 font-bold">Desventajas</th>
+              </tr>
+            </thead>
+            <tbody>
+              {COMPARISON_TABLE.map((row) => (
+                <tr key={row.algorithm} className="border-t border-slate-200">
+                  <td className="px-4 py-3 font-semibold text-slate-900">{row.algorithm}</td>
+                  <td className="px-4 py-3">{row.problemType}</td>
+                  <td className="px-4 py-3">{row.advantages}</td>
+                  <td className="px-4 py-3">{row.disadvantages}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="mt-5 rounded-xl border border-cyan-200 bg-cyan-50 p-4 text-sm leading-relaxed text-cyan-950">
+          Esta comparacion orienta la eleccion inicial del modelo. La decision final debe validarse con metricas y pruebas del caso real.
+        </div>
+      </article>
+    );
+  }
 
   return (
     <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
