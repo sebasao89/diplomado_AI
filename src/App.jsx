@@ -3,6 +3,8 @@ import Semana1Page from "../semana1.jsx";
 import Semana2Page from "../semana2.jsx";
 import Semana3Page from "../semana3.jsx";
 import Semana4Page from "../semana4.jsx";
+import Semana5Page from "../semana5.jsx";
+import Semana6Page from "../semana6.jsx";
 import MaterialesPDFPage from "../materialesPDF.jsx";
 
 const TOTAL_WEEKS = 6;
@@ -18,17 +20,6 @@ function getPageFromPath(pathname) {
   if (!Number.isInteger(parsed)) return 1;
 
   return parsed >= 1 && parsed <= TOTAL_WEEKS ? parsed : 1;
-}
-
-function PendingWeek({ weekNumber }) {
-  return (
-    <div className="mx-auto max-w-4xl px-4 py-24 text-center">
-      <div className="rounded-2xl border border-slate-200 bg-slate-50 p-12 shadow-sm">
-        <h2 className="mb-4 text-3xl font-bold text-slate-700">Semana {weekNumber}</h2>
-        <p className="text-lg text-slate-500">Proximamente...</p>
-      </div>
-    </div>
-  );
 }
 
 function App() {
@@ -121,7 +112,8 @@ function App() {
         {activePage === 2 && <Semana2Page />}
         {activePage === 3 && <Semana3Page />}
         {activePage === 4 && <Semana4Page />}
-        {activePage > 4 && <PendingWeek weekNumber={activePage} />}
+        {activePage === 5 && <Semana5Page />}
+        {activePage === 6 && <Semana6Page />}
       </main>
     </div>
   );
