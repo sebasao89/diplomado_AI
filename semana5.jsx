@@ -130,6 +130,67 @@ function Semana5Page() {
         </div>
       </section>
 
+      <section className="mt-8 rounded-2xl border border-indigo-100 bg-gradient-to-br from-indigo-50 via-white to-cyan-50 p-6 shadow-sm">
+        <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-indigo-100 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-indigo-800">
+          <Sparkles className="h-4 w-4" /> Insight Semana 5
+        </div>
+        <h2 className="text-xl font-black text-slate-900">Que cambia frente a las semanas anteriores</h2>
+        <p className="mt-2 text-sm leading-relaxed text-slate-700">
+          Hasta la Semana 4 construiste la base del pipeline completo. En la Semana 5 das el salto
+          de "preparar y medir" a "decidir que modelo supervisado entrenar" con criterio tecnico.
+        </p>
+
+        <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5">
+          <article className="rounded-xl border border-slate-200 bg-white p-4">
+            <p className="mb-2 text-xs font-bold uppercase tracking-wide text-slate-500">Semana 1</p>
+            <h3 className="mb-2 text-sm font-bold text-slate-900">Fundamentos de IA</h3>
+            <p className="text-xs leading-relaxed text-slate-700">
+              Entendiste paradigmas, conceptos base y el panorama general de modelos.
+            </p>
+          </article>
+
+          <article className="rounded-xl border border-slate-200 bg-white p-4">
+            <p className="mb-2 text-xs font-bold uppercase tracking-wide text-slate-500">Semana 2</p>
+            <h3 className="mb-2 text-sm font-bold text-slate-900">Datos y preparacion</h3>
+            <p className="text-xs leading-relaxed text-slate-700">
+              Trabajaste limpieza, transformaciones, escalado y balanceo para entrenar mejor.
+            </p>
+          </article>
+
+          <article className="rounded-xl border border-slate-200 bg-white p-4">
+            <p className="mb-2 text-xs font-bold uppercase tracking-wide text-slate-500">Semana 3</p>
+            <h3 className="mb-2 text-sm font-bold text-slate-900">Evaluacion del modelo</h3>
+            <p className="text-xs leading-relaxed text-slate-700">
+              Interpretaste matriz de confusion, precision, recall, F1 y ROC para medir calidad.
+            </p>
+          </article>
+
+          <article className="rounded-xl border border-slate-200 bg-white p-4">
+            <p className="mb-2 text-xs font-bold uppercase tracking-wide text-slate-500">Semana 4</p>
+            <h3 className="mb-2 text-sm font-bold text-slate-900">NLP y representacion</h3>
+            <p className="text-xs leading-relaxed text-slate-700">
+              Convertiste texto en variables utiles: normalizacion, tokenizacion, BoW y n-gramas.
+            </p>
+          </article>
+
+          <article className="rounded-xl border border-cyan-200 bg-cyan-50 p-4">
+            <p className="mb-2 text-xs font-bold uppercase tracking-wide text-cyan-700">Semana 5</p>
+            <h3 className="mb-2 text-sm font-bold text-cyan-900">Aprendizaje supervisado aplicado</h3>
+            <p className="text-xs leading-relaxed text-cyan-900/90">
+              Profundizas en seleccionar el algoritmo correcto segun el problema y el contexto:
+              Regresion, Naive Bayes, SVM, K-NN y Arboles con sus ventajas, supuestos y riesgos.
+            </p>
+          </article>
+        </div>
+
+        <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+          <p className="text-xs leading-relaxed text-emerald-900/90">
+            <span className="font-bold">En resumen:</span> antes construiste la base (datos + metricas + representacion);
+            ahora tomas decisiones de modelado supervisado con criterios tecnicos y de negocio.
+          </p>
+        </div>
+      </section>
+
       <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <h2 className="mb-4 text-xl font-bold text-slate-800">Mapa de algoritmos</h2>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
