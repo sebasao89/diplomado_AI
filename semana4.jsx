@@ -309,6 +309,58 @@ function Semana4Page() {
         </div>
       </section>
 
+      <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
+          <article className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h2 className="mb-3 text-xl font-bold text-slate-800">Donde se puede encontrar</h2>
+            <p className="mb-4 text-sm text-slate-600">
+              El preprocesamiento en NLP aparece como etapa base en multiples soluciones de lenguaje.
+            </p>
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+              {[
+                ["Recuperacion de informacion", "Busca y ordena contenido relevante en grandes colecciones."],
+                ["Extraccion y categorizacion", "Clasifica texto y extrae entidades o temas clave."],
+                ["Analisis de sentimientos", "Detecta opinion, tono y subjetividad en mensajes."],
+                ["Traduccion automatica", "Convierte texto entre idiomas con apoyo de modelos NLP."],
+                ["Generacion de lenguaje", "Crea respuestas, resúmenes o texto nuevo."],
+                ["Questions & Answering", "Sustenta chatbots y asistentes que responden preguntas."],
+              ].map(([title, desc]) => (
+                <div key={title} className="rounded-xl border border-white bg-white p-4 shadow-sm">
+                  <h3 className="mb-1 text-sm font-bold text-slate-800">{title}</h3>
+                  <p className="text-xs leading-relaxed text-slate-600">{desc}</p>
+                </div>
+              ))}
+            </div>
+          </article>
+
+          <article className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h2 className="mb-3 text-xl font-bold text-slate-800">Conceptos para el NLP</h2>
+            <p className="mb-4 text-sm text-slate-600">
+              Son las piezas base que convierten texto libre en representaciones utiles para analizar y modelar.
+            </p>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {[
+                ["Corpus", "Coleccion de textos: articulos, libros, tweets o criticas. Ejemplo: miles de reseñas de peliculas para analizar opinion."],
+                ["Bag of Words", "Representa el contenido por frecuencia de palabras sin orden. Ejemplo: 'IA', 'IA', 'datos' -> IA:2, datos:1."],
+                ["Normalizacion", "Pone el texto en igualdad de condiciones: minusculas, puntuacion, numeros. Ejemplo: 'Hola, Mundo 2026' -> 'hola mundo'."],
+                ["Tokenizacion", "Divide el texto en unidades pequeñas como palabras o frases. Ejemplo: 'Me gusta NLP' -> ['Me', 'gusta', 'NLP']."],
+                ["Segmentacion", "Separa en oraciones o parrafos para procesarlos mejor. Ejemplo: un texto largo se corta en frases antes de clasificarlo."],
+                ["Stemming", "Reduce palabras a su raiz o tallo. Ejemplo: 'caminando', 'caminar', 'camina' -> 'camin'."],
+                ["Lematizacion", "Convierte palabras flexionadas en su lema valido. Ejemplo: 'caminando' -> 'caminar', 'mejores' -> 'mejor'."],
+                ["Stop Word", "Elimina palabras que aportan poco significado. Ejemplo: 'de', 'la', 'y', 'el' suelen retirarse en analisis."],
+                ["POS Tagging", "Etiqueta sustantivos, verbos, adjetivos, etc. Ejemplo: 'correr' = verbo, 'rápido' = adjetivo."],
+                ["n-gramas", "Conserva secuencias contiguas de N elementos. Ejemplo: 'inteligencia artificial' como bigrama."],
+              ].map(([title, desc]) => (
+                <div key={title} className="rounded-xl border border-white bg-white p-4 shadow-sm">
+                  <h3 className="mb-1 text-sm font-bold text-slate-800">{title}</h3>
+                  <p className="text-xs leading-relaxed text-slate-600">{desc}</p>
+                </div>
+              ))}
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
         <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
           <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-slate-800">
