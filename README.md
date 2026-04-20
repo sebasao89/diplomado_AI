@@ -52,6 +52,50 @@ La app ya incluye:
 
 	npm run preview
 
+## Despliegue en Cloudflare (Pages)
+
+Este proyecto ya puede publicarse como sitio estatico en Cloudflare Pages.
+
+### Opcion 1: Deploy por CLI
+
+1. Autenticar en Cloudflare (una sola vez):
+
+  npx wrangler login
+
+2. Publicar:
+
+  npm run cf:deploy
+
+3. Deploy de produccion forzando rama main:
+
+  npm run cf:deploy:prod
+
+Notas:
+
+- El proyecto de Pages se crea/reutiliza con nombre diplomadoia.
+- El build command es npm run build.
+- El directorio publicado es dist.
+
+### Opcion 2: Deploy por Dashboard
+
+1. Ir a Cloudflare Pages y crear proyecto.
+2. Conectar el repositorio.
+3. Configurar:
+  - Framework preset: Vite
+  - Build command: npm run build
+  - Build output directory: dist
+4. Guardar y desplegar.
+
+### Publicar en subdominio del dominio propio
+
+Para publicar en subdominio, usa etiqueta en minusculas: diplomadoia.
+
+1. En Cloudflare Pages, abrir el proyecto diplomadoia.
+2. Ir a Custom domains y agregar:
+  - diplomadoia.tudominio.com
+3. Si el dominio esta en la misma cuenta de Cloudflare, DNS se configura automaticamente.
+4. Si no, crear el CNAME apuntando al dominio pages.dev generado por el proyecto.
+
 ## PDF de clases
 
 Los PDF del diplomado deben copiarse dentro de:

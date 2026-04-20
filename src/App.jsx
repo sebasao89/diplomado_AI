@@ -44,6 +44,8 @@ function App() {
       window.history.replaceState({ week: activePage }, "", canonicalPath);
     }
 
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+
     // Keep the mobile drawer closed after navigation changes.
     setIsMobileMenuOpen(false);
   }, [activePage]);

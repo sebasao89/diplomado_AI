@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "cf:deploy": "npm run build && npx wrangler pages deploy dist --project-name diplomadoia",
+    "cf:deploy:prod": "npm run build && npx wrangler pages deploy dist --project-name diplomadoia --branch main"
   },
   "dependencies": {
     "lucide-react": "^0.516.0",

@@ -611,10 +611,10 @@ const Semana1Content = () => {
           
           <h3 className="text-xl font-bold text-slate-800 mt-6 mb-3">¿Cómo funciona exactamente?</h3>
           <ol className="list-decimal pl-5 space-y-2 mb-8 text-slate-600">
-            <li><strong>Entradas ($x_1, x_2, ..., x_n$):</strong> Son las señales o datos numéricos que recibe la neurona.</li>
-            <li><strong>Pesos ($w_1, w_2, ..., w_n$):</strong> Cada entrada está conectada a la neurona mediante un "peso". El perceptrón multiplica cada entrada por su respectivo peso. Estos pesos determinan la <em>importancia</em> de cada entrada.</li>
-            <li><strong>Sumatoria ($\Sigma$):</strong> El núcleo de la neurona suma todas las entradas previamente ponderadas.</li>
-            <li><strong>Bias ($b$):</strong> Es un sesgo que permite "desplazar" la función de activación. Actúa como la flexibilidad de la neurona para activarse.</li>
+            <li><strong>Entradas (x1, x2, ..., xn):</strong> Son las señales o datos numéricos que recibe la neurona.</li>
+            <li><strong>Pesos (w1, w2, ..., wn):</strong> Cada entrada está conectada a la neurona mediante un "peso". El perceptrón multiplica cada entrada por su respectivo peso. Estos pesos determinan la <em>importancia</em> de cada entrada.</li>
+            <li><strong>Sumatoria (Sigma):</strong> El núcleo de la neurona suma todas las entradas previamente ponderadas.</li>
+            <li><strong>Bias (b):</strong> Es un sesgo que permite "desplazar" la función de activación. Actúa como la flexibilidad de la neurona para activarse.</li>
             <li><strong>Función de Activación:</strong> Evalúa la suma total y decide si la neurona se "activa" (1) o no (0).</li>
           </ol>
 
