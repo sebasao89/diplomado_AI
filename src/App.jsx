@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Semana1Page from "../semana1.jsx";
 import Semana2Page from "../semana2.jsx";
+import Semana3Page from "../semana3.jsx";
 
 const TOTAL_WEEKS = 6;
 
@@ -94,7 +95,8 @@ function App() {
       <main>
         {activePage === 1 && <Semana1Page />}
         {activePage === 2 && <Semana2Page />}
-        {activePage > 2 && <PendingWeek weekNumber={activePage} />}
+        {activePage === 3 && <Semana3Page />}
+        {activePage > 3 && <PendingWeek weekNumber={activePage} />}
       </main>
     </div>
   );
