@@ -212,25 +212,100 @@ function Semana4Page() {
 
       <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <h2 className="mb-4 text-xl font-bold text-slate-800">Que es el Preprocesamiento en NLP</h2>
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <div className="rounded-xl bg-blue-50 p-5 border border-blue-100">
-            <p className="mb-2 text-xs font-bold uppercase tracking-wide text-blue-700">Definicion</p>
-            <p className="text-sm leading-relaxed text-blue-950">
-              Transformacion de texto en un formato adecuado para su analisis.
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            <div className="rounded-xl bg-blue-50 p-5 border border-blue-100">
+              <p className="mb-2 text-xs font-bold uppercase tracking-wide text-blue-700">Definicion</p>
+              <p className="text-sm leading-relaxed text-blue-950">
+                Transformacion de texto en un formato adecuado para su analisis.
+              </p>
+            </div>
+            <div className="rounded-xl bg-indigo-50 p-5 border border-indigo-100">
+              <p className="mb-2 text-xs font-bold uppercase tracking-wide text-indigo-700">Objetivo</p>
+              <p className="text-sm leading-relaxed text-indigo-950">
+                Tratar la interaccion entre los lenguajes humanos (lenguajes naturales) y los
+                dispositivos informaticos.
+              </p>
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+            <p className="text-sm leading-relaxed text-slate-700">
+              Campo que combina la <strong>Informatica</strong>, la <strong>Inteligencia Artificial</strong> y la <strong>Lingüistica</strong>.
             </p>
           </div>
-          <div className="rounded-xl bg-indigo-50 p-5 border border-indigo-100">
-            <p className="mb-2 text-xs font-bold uppercase tracking-wide text-indigo-700">Objetivo</p>
-            <p className="text-sm leading-relaxed text-indigo-950">
-              Tratar la interaccion entre los lenguajes humanos (lenguajes naturales) y los
-              dispositivos informaticos.
-            </p>
+
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-inner">
+            <p className="mb-4 text-xs font-bold uppercase tracking-wider text-slate-500">Vista grafica del proceso</p>
+            <div className="rounded-2xl border border-slate-200 bg-gradient-to-br from-white via-slate-50 to-cyan-50 p-6 shadow-sm">
+              <svg viewBox="0 0 980 430" className="h-full w-full">
+                <defs>
+                  <linearGradient id="flowBg" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#ffffff" />
+                    <stop offset="100%" stopColor="#f8fafc" />
+                  </linearGradient>
+                  <linearGradient id="blueFill" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#dbeafe" />
+                    <stop offset="100%" stopColor="#eff6ff" />
+                  </linearGradient>
+                  <linearGradient id="greenFill" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#d1fae5" />
+                    <stop offset="100%" stopColor="#ecfdf5" />
+                  </linearGradient>
+                  <marker id="arrowHead" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+                    <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8" />
+                  </marker>
+                </defs>
+
+                <rect x="0" y="0" width="980" height="430" rx="24" fill="url(#flowBg)" />
+
+                <text x="36" y="40" fill="#0f172a" fontSize="14" fontWeight="700" letterSpacing="1.5">
+                  FLUJO DE PREPROCESAMIENTO
+                </text>
+
+                <rect x="34" y="150" width="178" height="92" rx="18" fill="#eff6ff" stroke="#93c5fd" />
+                <text x="123" y="184" textAnchor="middle" fill="#1d4ed8" fontSize="14" fontWeight="700">TEXTO CRUDO</text>
+                <text x="123" y="208" textAnchor="middle" fill="#334155" fontSize="16" fontWeight="600">Entrada</text>
+
+                <line x1="212" y1="196" x2="318" y2="196" stroke="#cbd5e1" strokeWidth="5" markerEnd="url(#arrowHead)" />
+
+                <rect x="326" y="118" width="322" height="156" rx="22" fill="#ffffff" stroke="#cbd5e1" />
+                <rect x="346" y="136" width="282" height="32" rx="14" fill="#dbeafe" />
+                <text x="487" y="157" textAnchor="middle" fill="#1e3a8a" fontSize="13" fontWeight="800">NORMALIZACION</text>
+                <rect x="346" y="176" width="282" height="32" rx="14" fill="#e0f2fe" />
+                <text x="487" y="197" textAnchor="middle" fill="#0369a1" fontSize="13" fontWeight="800">TOKENIZACION</text>
+                <rect x="346" y="216" width="282" height="32" rx="14" fill="#ecfccb" />
+                <text x="487" y="237" textAnchor="middle" fill="#3f6212" fontSize="13" fontWeight="800">LIMPIEZA / STOP WORDS</text>
+
+                <line x1="648" y1="196" x2="754" y2="196" stroke="#cbd5e1" strokeWidth="5" markerEnd="url(#arrowHead)" />
+
+                <rect x="756" y="150" width="178" height="92" rx="18" fill="#ecfdf5" stroke="#86efac" />
+                <text x="845" y="184" textAnchor="middle" fill="#047857" fontSize="14" fontWeight="700">TEXTO LISTO</text>
+                <text x="845" y="208" textAnchor="middle" fill="#334155" fontSize="16" fontWeight="600">Analisis</text>
+
+                <circle cx="758" cy="90" r="58" fill="#dbeafe" fillOpacity="0.7" stroke="#93c5fd" strokeWidth="2" />
+                <circle cx="828" cy="90" r="58" fill="#e0e7ff" fillOpacity="0.7" stroke="#a5b4fc" strokeWidth="2" />
+                <circle cx="793" cy="132" r="32" fill="#d1fae5" fillOpacity="0.95" stroke="#6ee7b7" strokeWidth="2" />
+
+                <text x="730" y="94" fill="#1d4ed8" fontSize="12" fontWeight="800">Informatica</text>
+                <text x="816" y="94" fill="#4338ca" fontSize="12" fontWeight="800">IA</text>
+                <text x="793" y="138" textAnchor="middle" fill="#047857" fontSize="12" fontWeight="900">NLP</text>
+
+                <text x="710" y="162" fill="#475569" fontSize="10" fontWeight="600">Lingüistica</text>
+                <text x="843" y="162" fill="#475569" fontSize="10" fontWeight="600">Datos</text>
+
+                <text x="122" y="274" textAnchor="middle" fill="#334155" fontSize="11" fontWeight="700">Proceso</text>
+                <text x="487" y="274" textAnchor="middle" fill="#334155" fontSize="11" fontWeight="700">Transformacion</text>
+                <text x="845" y="274" textAnchor="middle" fill="#334155" fontSize="11" fontWeight="700">Resultado</text>
+
+                <rect x="34" y="306" width="912" height="60" rx="16" fill="#ffffff" stroke="#e2e8f0" />
+                <text x="56" y="342" fill="#64748b" fontSize="11" fontWeight="700">CAMPO INTERDISCIPLINARIO:</text>
+                <text x="248" y="342" fill="#0f172a" fontSize="14" fontWeight="600">
+                  Informatica + Inteligencia Artificial + Lingüistica
+                </text>
+              </svg>
+            </div>
           </div>
-        </div>
-        <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
-          <p className="text-sm leading-relaxed text-slate-700">
-            Campo que combina la <strong>Informatica</strong>, la <strong>Inteligencia Artificial</strong> y la <strong>Lingüistica</strong>.
-          </p>
         </div>
       </section>
 
