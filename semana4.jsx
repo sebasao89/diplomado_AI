@@ -2,6 +2,7 @@ import React, { useMemo, useState } from "react";
 import {
   Languages,
   BookText,
+  Database,
   Sparkles,
   SplitSquareHorizontal,
   Filter,
@@ -311,7 +312,7 @@ function Semana4Page() {
 
       <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
-          <article className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+          <article className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-3 text-xl font-bold text-slate-800">Donde se puede encontrar</h2>
             <p className="mb-4 text-sm text-slate-600">
               El preprocesamiento en NLP aparece como etapa base en multiples soluciones de lenguaje.
@@ -333,26 +334,31 @@ function Semana4Page() {
             </div>
           </article>
 
-          <article className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+          <article className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-3 text-xl font-bold text-slate-800">Conceptos para el NLP</h2>
             <p className="mb-4 text-sm text-slate-600">
               Son las piezas base que convierten texto libre en representaciones utiles para analizar y modelar.
             </p>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {[
-                ["Corpus", "Coleccion de textos: articulos, libros, tweets o criticas. Ejemplo: miles de reseñas de peliculas para analizar opinion."],
-                ["Bag of Words", "Representa el contenido por frecuencia de palabras sin orden. Ejemplo: 'IA', 'IA', 'datos' -> IA:2, datos:1."],
-                ["Normalizacion", "Pone el texto en igualdad de condiciones: minusculas, puntuacion, numeros. Ejemplo: 'Hola, Mundo 2026' -> 'hola mundo'."],
-                ["Tokenizacion", "Divide el texto en unidades pequeñas como palabras o frases. Ejemplo: 'Me gusta NLP' -> ['Me', 'gusta', 'NLP']."],
-                ["Segmentacion", "Separa en oraciones o parrafos para procesarlos mejor. Ejemplo: un texto largo se corta en frases antes de clasificarlo."],
-                ["Stemming", "Reduce palabras a su raiz o tallo. Ejemplo: 'caminando', 'caminar', 'camina' -> 'camin'."],
-                ["Lematizacion", "Convierte palabras flexionadas en su lema valido. Ejemplo: 'caminando' -> 'caminar', 'mejores' -> 'mejor'."],
-                ["Stop Word", "Elimina palabras que aportan poco significado. Ejemplo: 'de', 'la', 'y', 'el' suelen retirarse en analisis."],
-                ["POS Tagging", "Etiqueta sustantivos, verbos, adjetivos, etc. Ejemplo: 'correr' = verbo, 'rápido' = adjetivo."],
-                ["n-gramas", "Conserva secuencias contiguas de N elementos. Ejemplo: 'inteligencia artificial' como bigrama."],
-              ].map(([title, desc]) => (
-                <div key={title} className="rounded-xl border border-white bg-white p-4 shadow-sm">
-                  <h3 className="mb-1 text-sm font-bold text-slate-800">{title}</h3>
+                { title: "Corpus", icon: Database, accent: "text-blue-700", bg: "bg-blue-50", desc: "Coleccion de textos: articulos, libros, tweets o criticas. Ejemplo: miles de reseñas de peliculas para analizar opinion." },
+                { title: "Bag of Words", icon: BarChart3, accent: "text-indigo-700", bg: "bg-indigo-50", desc: "Representa el contenido por frecuencia de palabras sin orden. Ejemplo: 'IA', 'IA', 'datos' -> IA:2, datos:1." },
+                { title: "Normalizacion", icon: Filter, accent: "text-emerald-700", bg: "bg-emerald-50", desc: "Pone el texto en igualdad de condiciones: minusculas, puntuacion, numeros. Ejemplo: 'Hola, Mundo 2026' -> 'hola mundo'." },
+                { title: "Tokenizacion", icon: SplitSquareHorizontal, accent: "text-cyan-700", bg: "bg-cyan-50", desc: "Divide el texto en unidades pequeñas como palabras o frases. Ejemplo: 'Me gusta NLP' -> ['Me', 'gusta', 'NLP']." },
+                { title: "Segmentacion", icon: ListTree, accent: "text-slate-700", bg: "bg-slate-100", desc: "Separa en oraciones o parrafos para procesarlos mejor. Ejemplo: un texto largo se corta en frases antes de clasificarlo." },
+                { title: "Stemming", icon: Tags, accent: "text-rose-700", bg: "bg-rose-50", desc: "Reduce palabras a su raiz o tallo. Ejemplo: 'caminando', 'caminar', 'camina' -> 'camin'." },
+                { title: "Lematizacion", icon: Sparkles, accent: "text-violet-700", bg: "bg-violet-50", desc: "Convierte palabras flexionadas en su lema valido. Ejemplo: 'caminando' -> 'caminar', 'mejores' -> 'mejor'." },
+                { title: "Stop Word", icon: Filter, accent: "text-amber-700", bg: "bg-amber-50", desc: "Elimina palabras que aportan poco significado. Ejemplo: 'de', 'la', 'y', 'el' suelen retirarse en analisis." },
+                { title: "POS Tagging", icon: Tags, accent: "text-blue-700", bg: "bg-blue-50", desc: "Etiqueta sustantivos, verbos, adjetivos, etc. Ejemplo: 'correr' = verbo, 'rápido' = adjetivo." },
+                { title: "n-gramas", icon: Hash, accent: "text-emerald-700", bg: "bg-emerald-50", desc: "Conserva secuencias contiguas de N elementos. Ejemplo: 'inteligencia artificial' como bigrama." },
+              ].map(({ title, desc, icon: Icon, accent, bg }) => (
+                <div key={title} className="rounded-xl border border-white bg-white p-4 shadow-sm transition-transform hover:-translate-y-0.5">
+                  <div className="mb-2 flex items-center gap-3">
+                    <div className={`rounded-lg ${bg} p-2`}>
+                      <Icon className={`h-4 w-4 ${accent}`} />
+                    </div>
+                    <h3 className="text-sm font-bold text-slate-800">{title}</h3>
+                  </div>
                   <p className="text-xs leading-relaxed text-slate-600">{desc}</p>
                 </div>
               ))}
