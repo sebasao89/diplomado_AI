@@ -1,13 +1,16 @@
 import React, { useMemo, useState } from "react";
 import {
   GraduationCap,
-  BrainCircuit,
+  Sparkles,
   LineChart,
   Binary,
+  BrainCircuit,
   ShieldCheck,
   Orbit,
   GitBranch,
-  Sparkles,
+  SlidersHorizontal,
+  ShieldAlert,
+  Scale,
   CheckCircle2,
 } from "lucide-react";
 
@@ -19,8 +22,6 @@ const ALGORITHMS = [
     type: "regresion",
     scale: "medio",
     interpretability: "alta",
-    strengths: "Simple, rapida y facil de explicar.",
-    risks: "Sensible a outliers y relaciones no lineales.",
   },
   {
     key: "logistic",
@@ -29,8 +30,6 @@ const ALGORITHMS = [
     type: "clasificacion",
     scale: "medio",
     interpretability: "alta",
-    strengths: "Entrega probabilidades para decisiones binarias.",
-    risks: "Requiere relaciones relativamente lineales.",
   },
   {
     key: "naive_bayes",
@@ -39,8 +38,6 @@ const ALGORITHMS = [
     type: "clasificacion",
     scale: "grande",
     interpretability: "media",
-    strengths: "Muy rapido y eficiente para texto.",
-    risks: "Supone independencia de variables.",
   },
   {
     key: "svm",
@@ -49,8 +46,6 @@ const ALGORITHMS = [
     type: "clasificacion",
     scale: "medio",
     interpretability: "media",
-    strengths: "Excelente margen de separacion en alta dimensionalidad.",
-    risks: "Mas costoso en datasets muy grandes.",
   },
   {
     key: "knn",
@@ -59,8 +54,6 @@ const ALGORITHMS = [
     type: "clasificacion",
     scale: "pequeno",
     interpretability: "media",
-    strengths: "Intuitivo y facil de implementar.",
-    risks: "Prediccion lenta y sensible al escalado.",
   },
   {
     key: "tree",
@@ -69,10 +62,322 @@ const ALGORITHMS = [
     type: "clasificacion",
     scale: "medio",
     interpretability: "alta",
-    strengths: "Reglas claras y visuales.",
-    risks: "Puede sobreajustar sin controles de profundidad.",
   },
 ];
+
+const SECTION_ORDER = [
+  {
+    id: "linear-regression",
+    title: "Regresion Lineal",
+    accent: "blue",
+    summary:
+      "Modela una salida continua mediante una relacion lineal entre variables independientes y dependientes.",
+    advantages: [
+      "Simple de entender y explicar.",
+      "Rapida de entrenar.",
+      "Sirve como linea base para comparar otros modelos.",
+    ],
+    uses: [
+      "Precio de casas.",
+      "Ventas futuras.",
+      "Temperatura, demanda o consumo.",
+    ],
+    disadvantages: [
+      "No captura bien relaciones no lineales.",
+      "Es sensible a valores extremos.",
+      "Puede quedarse corta en problemas complejos.",
+    ],
+    whenNotUse: [
+      "Cuando la relacion entre variables es claramente no lineal.",
+      "Cuando hay muchos outliers y no vas a tratarlos.",
+    ],
+    example: "Ejemplo: predecir el precio de una casa a partir de su tamano.",
+  },
+  {
+    id: "logistic-regression",
+    title: "Regresion Logistica",
+    accent: "indigo",
+    summary:
+      "Se usa para clasificacion binaria y transforma una salida lineal en una probabilidad entre 0 y 1.",
+    advantages: [
+      "Entrega probabilidades interpretables.",
+      "Muy util en decisiones binarias.",
+      "Suele funcionar bien como modelo base en negocio.",
+    ],
+    uses: [
+      "Spam / no spam.",
+      "Sano / enfermo.",
+      "Aprobado / reprobado.",
+    ],
+    disadvantages: [
+      "Prefiere fronteras relativamente lineales.",
+      "Puede requerir ajuste de hiperparametros.",
+      "No es la mejor opcion para relaciones complejas sin transformaciones.",
+    ],
+    whenNotUse: [
+      "Cuando el problema no es binario y no vas a extenderlo.",
+      "Cuando la frontera de decision es muy compleja o muy no lineal.",
+    ],
+    nested: [
+      {
+        title: "Ajuste de hiperparametros",
+        note:
+          "No es otro algoritmo: es la forma de elegir la mejor configuracion de la regresion logistica.",
+        points: [
+          "Grid Search prueba todas las combinaciones.",
+          "Random Search explora combinaciones aleatorias.",
+          "Optimizacion bayesiana concentra la busqueda en zonas prometedoras.",
+          "Validacion cruzada anidada ayuda a estimar mejor el rendimiento final.",
+        ],
+      },
+      {
+        title: "Regularizacion L1 y L2",
+        note:
+          "Tampoco son algoritmos aparte: son tecnicas para controlar el sobreajuste dentro del modelo.",
+        points: [
+          "L1 puede llevar coeficientes a cero y ayuda a seleccionar variables.",
+          "L2 reduce la magnitud de los coeficientes y estabiliza el modelo.",
+        ],
+      },
+    ],
+    example:
+      "Ejemplo: diagnosticar diabetes usando la probabilidad generada por el modelo.",
+  },
+  {
+    id: "naive-bayes",
+    title: "Naive Bayes",
+    accent: "emerald",
+    summary:
+      "Clasificador probabilistico que asume independencia entre caracteristicas.",
+    advantages: [
+      "Muy rapido y escalable.",
+      "Funciona bien con texto.",
+      "Rinde bien aun con pocos datos.",
+    ],
+    uses: [
+      "Spam.",
+      "Analisis de sentimientos.",
+      "Clasificacion documental.",
+    ],
+    disadvantages: [
+      "Asume independencia entre variables.",
+      "Puede bajar su precision si las caracteristicas estan correlacionadas.",
+    ],
+    whenNotUse: [
+      "Cuando las dependencias entre variables son importantes.",
+      "Cuando necesitas interacciones complejas entre caracteristicas.",
+    ],
+    nested: [
+      {
+        title: "Variantes de Naive Bayes",
+        note:
+          "Estas variantes pertenecen a la familia Naive Bayes y se eligen segun el tipo de dato.",
+        points: [
+          "GaussianNB: variables continuas con distribucion normal.",
+          "BernoulliNB: variables binarias, presencia o ausencia.",
+          "CategoricalNB: variables categoricas discretas.",
+          "ComplementNB: utiles con clases desbalanceadas.",
+          "MultinomialNB: conteos y frecuencias, muy usado en texto.",
+        ],
+      },
+    ],
+    example:
+      "Ejemplo: clasificar correos segun la frecuencia de palabras como oferta o gratis.",
+  },
+  {
+    id: "svm",
+    title: "Maquinas de Vectores de Soporte (SVM)",
+    accent: "violet",
+    summary:
+      "Busca el hiperplano que separa mejor las clases maximizando el margen entre ellas.",
+    advantages: [
+      "Muy fuerte en alta dimensionalidad.",
+      "Puede usar kernels para fronteras no lineales.",
+      "Muy bueno en texto e imagenes.",
+    ],
+    uses: [
+      "Clasificacion binaria.",
+      "Texto con muchas variables.",
+      "Imagenes y problemas de alta dimensionalidad.",
+    ],
+    disadvantages: [
+      "Puede ser costoso en datasets grandes.",
+      "No siempre es el mas interpretable.",
+      "Ajustar kernels y parametros puede requerir bastante prueba.",
+    ],
+    whenNotUse: [
+      "Cuando el dataset es muy grande y necesitas entrenamiento rapido.",
+      "Cuando la interpretabilidad simple es prioridad.",
+    ],
+    example:
+      "Ejemplo: clasificar documentos o imagenes con gran cantidad de variables.",
+  },
+  {
+    id: "knn",
+    title: "K vecinos mas cercanos (K-NN)",
+    accent: "amber",
+    summary:
+      "Clasifica un punto por la mayoria de sus vecinos mas cercanos en el espacio de caracteristicas.",
+    advantages: [
+      "Muy simple e intuitivo.",
+      "No requiere entrenamiento pesado.",
+      "Facil de explicar conceptualmente.",
+    ],
+    uses: [
+      "Clasificacion sencilla.",
+      "Recomendacion basica.",
+      "Escenarios donde la cercania entre instancias es importante.",
+    ],
+    disadvantages: [
+      "La prediccion puede ser lenta.",
+      "Es sensible al escalado.",
+      "Se degrada con alta dimensionalidad.",
+    ],
+    whenNotUse: [
+      "Cuando el dataset es muy grande.",
+      "Cuando tienes demasiadas dimensiones.",
+      "Cuando necesitas predicciones muy rapidas.",
+    ],
+    example:
+      "Ejemplo: clasificar una flor segun sus vecinos en el dataset Iris.",
+  },
+  {
+    id: "decision-tree",
+    title: "Arbol de Decision",
+    accent: "slate",
+    summary:
+      "Divide recursivamente los datos en reglas hasta llegar a una prediccion final en las hojas.",
+    advantages: [
+      "Muy interpretable.",
+      "Permite reglas claras de decision.",
+      "Sirve para clasificacion y regresion.",
+    ],
+    uses: [
+      "Reglas de negocio.",
+      "Clasificacion y regresion.",
+      "Casos donde importa explicar la ruta de decision.",
+    ],
+    disadvantages: [
+      "Tiende a sobreajustar si no se controla.",
+      "Puede ser inestable con pequenos cambios en los datos.",
+    ],
+    whenNotUse: [
+      "Cuando no vas a controlar profundidad o aplicar poda.",
+      "Cuando el ruido de los datos es muy alto.",
+    ],
+    example:
+      "Ejemplo: decidir si se aprueba un prestamo a partir de ingresos, edad e historial crediticio.",
+  },
+  {
+    id: "comparison",
+    title: "Comparacion final",
+    accent: "cyan",
+    summary:
+      "Cierra el bloque comparando rapidamente donde destaca cada tecnica y donde conviene evitarla.",
+    advantages: [
+      "Ayuda a elegir mejor segun el contexto.",
+      "Resume fortalezas y limites de cada tecnica.",
+      "Facilita la memoria visual del tema.",
+    ],
+    uses: [
+      "Elegir el modelo adecuado.",
+      "Contrastar interpretabilidad, costo y precision.",
+      "Preparar la siguiente fase de ajuste y validacion.",
+    ],
+    disadvantages: [
+      "No sustituye la validacion experimental.",
+      "No basta con memorizar el nombre del algoritmo.",
+    ],
+    whenNotUse: [
+      "Cuando ya tomaste la decision sin revisar el tipo de problema.",
+      "Cuando no comparaste el costo computacional ni la interpretabilidad.",
+    ],
+    example:
+      "Idea final: no elegir por nombre, sino por el tipo de problema, el tamano del dato y la interpretabilidad requerida.",
+  },
+];
+
+function SectionCard({ section }) {
+  const accentStyles = {
+    blue: "border-blue-200 bg-blue-50 text-blue-900",
+    indigo: "border-indigo-200 bg-indigo-50 text-indigo-900",
+    emerald: "border-emerald-200 bg-emerald-50 text-emerald-900",
+    rose: "border-rose-200 bg-rose-50 text-rose-900",
+    violet: "border-violet-200 bg-violet-50 text-violet-900",
+    amber: "border-amber-200 bg-amber-50 text-amber-900",
+    slate: "border-slate-200 bg-slate-50 text-slate-900",
+    cyan: "border-cyan-200 bg-cyan-50 text-cyan-900",
+  };
+
+  return (
+    <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <div className={`mb-3 inline-flex rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] ${accentStyles[section.accent]}`}>
+        Tema de estudio
+      </div>
+      <h3 className="text-2xl font-black text-slate-900">{section.title}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-slate-600">{section.summary}</p>
+
+      <div className="mt-5 grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <p className="mb-2 text-xs font-bold uppercase tracking-wide text-slate-500">Ventajas</p>
+          <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed text-slate-700">
+            {section.advantages.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <p className="mb-2 text-xs font-bold uppercase tracking-wide text-slate-500">Usos</p>
+          <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed text-slate-700">
+            {section.uses.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <p className="mb-2 text-xs font-bold uppercase tracking-wide text-slate-500">Desventajas</p>
+          <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed text-slate-700">
+            {section.disadvantages.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div className={`rounded-xl border p-4 ${accentStyles[section.accent]}`}>
+          <p className="mb-2 text-xs font-bold uppercase tracking-wide opacity-80">Cuando no usarlo</p>
+          <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed">
+            {section.whenNotUse.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {section.nested?.length > 0 && (
+        <div className="mt-5 space-y-4">
+          {section.nested.map((nestedSection) => (
+            <div key={nestedSection.title} className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <h4 className="text-base font-bold text-slate-900">{nestedSection.title}</h4>
+              <p className="mt-1 text-sm leading-relaxed text-slate-600">{nestedSection.note}</p>
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-slate-700">
+                {nestedSection.points.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className={`mt-5 rounded-xl border p-4 ${accentStyles[section.accent]}`}>
+        <p className="mb-2 text-xs font-bold uppercase tracking-wide opacity-80">Ejemplo</p>
+        <p className="text-sm leading-relaxed">{section.example}</p>
+      </div>
+    </article>
+  );
+}
 
 function getRecommendation(problemType, datasetSize, priority) {
   const candidates = ALGORITHMS.filter((algorithm) => {
@@ -139,6 +444,7 @@ function Semana5Page() {
               </ul>
             </div>
           </div>
+
           <div className="rounded-2xl border border-cyan-200 bg-white p-4">
             <p className="text-xs font-bold uppercase tracking-wide text-cyan-700">Objetivo</p>
             <p className="mt-1 text-sm text-slate-700">
@@ -155,7 +461,7 @@ function Semana5Page() {
         <h2 className="text-xl font-black text-slate-900">Que cambia frente a las semanas anteriores</h2>
         <p className="mt-2 text-sm leading-relaxed text-slate-700">
           Hasta la Semana 4 construiste la base del pipeline completo. En la Semana 5 das el salto
-          de "preparar y medir" a "decidir que modelo supervisado entrenar" con criterio tecnico.
+          de preparar y medir a decidir que modelo supervisado entrenar con criterio tecnico.
         </p>
 
         <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5">
@@ -195,16 +501,15 @@ function Semana5Page() {
             <p className="mb-2 text-xs font-bold uppercase tracking-wide text-cyan-700">Semana 5</p>
             <h3 className="mb-2 text-sm font-bold text-cyan-900">Aprendizaje supervisado aplicado</h3>
             <p className="text-xs leading-relaxed text-cyan-900/90">
-              Profundizas en seleccionar el algoritmo correcto segun el problema y el contexto:
-              Regresion, Naive Bayes, SVM, K-NN y Arboles con sus ventajas, supuestos y riesgos.
+              Profundizas en seleccionar el algoritmo correcto segun el problema y el contexto.
             </p>
           </article>
         </div>
 
         <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-4">
           <p className="text-xs leading-relaxed text-emerald-900/90">
-            <span className="font-bold">En resumen:</span> antes construiste la base (datos + metricas + representacion);
-            ahora tomas decisiones de modelado supervisado con criterios tecnicos y de negocio.
+            <span className="font-bold">En resumen:</span> antes construiste la base; ahora tomas
+            decisiones de modelado supervisado con criterios tecnicos y de negocio.
           </p>
         </div>
       </section>
@@ -265,23 +570,15 @@ function Semana5Page() {
       </section>
 
       <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-xl font-bold text-slate-800">Mapa de algoritmos</h2>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {ALGORITHMS.map(({ key, title, icon: Icon, strengths, risks }) => (
-            <article key={key} className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-              <div className="mb-2 flex items-center gap-2">
-                <div className="rounded-lg bg-white p-2">
-                  <Icon className="h-4 w-4 text-slate-700" />
-                </div>
-                <h3 className="text-sm font-bold text-slate-900">{title}</h3>
-              </div>
-              <p className="mb-2 text-xs text-slate-700">
-                <span className="font-bold">Ventaja:</span> {strengths}
-              </p>
-              <p className="text-xs text-slate-700">
-                <span className="font-bold">Riesgo:</span> {risks}
-              </p>
-            </article>
+        <h2 className="mb-2 text-xl font-bold text-slate-800">Desarrollo detallado del tema</h2>
+        <p className="mb-5 text-sm leading-relaxed text-slate-600">
+          Las secciones siguientes siguen el orden del estudio: primero los tipos de problema,
+          luego cada algoritmo o bloque de ajuste, y al final la comparacion general.
+        </p>
+
+        <div className="space-y-5">
+          {SECTION_ORDER.map((section) => (
+            <SectionCard key={section.id} section={section} />
           ))}
         </div>
       </section>
@@ -336,15 +633,15 @@ function Semana5Page() {
 
         <div className="mt-5 rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
           <p className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-emerald-700">
-            <Sparkles className="h-4 w-4" /> Recomendacion inicial
+            <CheckCircle2 className="h-4 w-4" /> Recomendacion inicial
           </p>
           <h3 className="text-lg font-black text-emerald-900">{recommendation.title}</h3>
           <p className="mt-2 text-sm leading-relaxed text-emerald-900/90">
-            {recommendation.strengths} Considera luego validacion cruzada y metricas de negocio
-            para confirmar esta decision.
+            La recomendacion orientativa cambia segun el problema, el tamano del dataset y la prioridad.
           </p>
           <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-700">
-            <CheckCircle2 className="h-4 w-4 text-emerald-600" /> Recomendacion orientativa basada en criterios del PDF.
+            <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+            Recomendacion orientativa basada en criterios del tema.
           </p>
         </div>
       </section>
