@@ -24,6 +24,7 @@ function Semana6Page() {
   const [searchMethod, setSearchMethod] = useState("grid");
   const [lambda, setLambda] = useState(2.5);
   const [regularization, setRegularization] = useState("l2");
+  const [complexity, setComplexity] = useState(5);
 
   const baseCoefficients = [1.2, 0.8, -0.6, 0.4, 0.2];
 
@@ -41,6 +42,44 @@ function Semana6Page() {
     }
     return "Optimizacion Bayesiana aprende de intentos previos y prioriza zonas prometedoras para reducir evaluaciones.";
   }, [searchMethod]);
+
+  const fittingState = useMemo(() => {
+    if (complexity <= 3) {
+      return {
+        title: "Subajuste (Underfitting)",
+        description:
+          "El modelo es demasiado simple. Tiene sesgo alto y no aprende patrones importantes del conjunto de entrenamiento.",
+        color: "text-amber-800",
+        box: "border-amber-200 bg-amber-50",
+      };
+    }
+
+    if (complexity >= 8) {
+      return {
+        title: "Sobreajuste (Overfitting)",
+        description:
+          "El modelo es demasiado complejo. Aprende ruido del entrenamiento y pierde capacidad de generalizacion.",
+        color: "text-rose-800",
+        box: "border-rose-200 bg-rose-50",
+      };
+    }
+
+    return {
+      title: "Zona de balance",
+      description:
+        "La complejidad es razonable: se reduce error de entrenamiento sin castigar demasiado el error de validacion.",
+      color: "text-emerald-800",
+      box: "border-emerald-200 bg-emerald-50",
+    };
+  }, [complexity]);
+
+  const trainError = useMemo(() => {
+    return Math.max(0.08, 0.62 - complexity * 0.055);
+  }, [complexity]);
+
+  const validationError = useMemo(() => {
+    return 0.18 + 0.016 * Math.pow(complexity - 5, 2);
+  }, [complexity]);
 
   const highlightText = (text) => {
     const terms = ["Grid Search", "Random Search", "Optimizacion Bayesiana", "hiperparametros", "regularizacion", "L1", "L2", "lambda", "coeficientes", "sobreajuste", "generalizacion"];
@@ -142,6 +181,39 @@ function Semana6Page() {
         </div>
       </section>
 
+      <section className="mt-8 rounded-2xl border border-indigo-100 bg-gradient-to-r from-indigo-50 via-white to-cyan-50 p-6 shadow-sm">
+        <h2 className="text-xl font-black text-slate-900">Teoria ampliada: ajuste, sesgo y varianza</h2>
+        <p className="mt-2 text-sm leading-relaxed text-slate-700">
+          Ajustar un modelo no significa solo mejorar una metrica en entrenamiento. El objetivo real es
+          encontrar un punto donde el modelo aprenda patron verdadero y no ruido. Por eso en esta etapa se
+          conecta la busqueda de hiperparametros con el equilibrio sesgo-varianza.
+        </p>
+
+        <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-3">
+          <article className="rounded-xl border border-white bg-white p-4 shadow-sm">
+            <p className="mb-2 text-xs font-bold uppercase tracking-wide text-indigo-700">1. Sesgo</p>
+            <p className="text-sm leading-relaxed text-slate-700">
+              Cuando el modelo es muy simple, comete errores sistematicos. Este escenario se conoce como
+              subajuste y suele mejorar aumentando capacidad o ajustando mejor hiperparametros.
+            </p>
+          </article>
+          <article className="rounded-xl border border-white bg-white p-4 shadow-sm">
+            <p className="mb-2 text-xs font-bold uppercase tracking-wide text-cyan-700">2. Varianza</p>
+            <p className="text-sm leading-relaxed text-slate-700">
+              Cuando el modelo es demasiado flexible, se adapta al ruido y falla en datos nuevos.
+              Este escenario es sobreajuste y se controla con regularizacion y validacion.
+            </p>
+          </article>
+          <article className="rounded-xl border border-white bg-white p-4 shadow-sm">
+            <p className="mb-2 text-xs font-bold uppercase tracking-wide text-emerald-700">3. Generalizacion</p>
+            <p className="text-sm leading-relaxed text-slate-700">
+              Un buen modelo no es el que mejor memoriza, sino el que mantiene buen rendimiento en
+              datos no vistos. Esta es la meta central de Semana 6.
+            </p>
+          </article>
+        </div>
+      </section>
+
       <section className="mt-8 rounded-2xl border border-emerald-100 bg-gradient-to-r from-emerald-50 via-white to-indigo-50 p-6 shadow-sm">
         <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-emerald-700">Modulo interactivo</p>
         <h2 className="mt-2 text-xl font-black text-slate-900">Simulador de regularizacion L1 vs L2</h2>
@@ -228,6 +300,73 @@ function Semana6Page() {
                 {highlightText("El objetivo es controlar sobreajuste sin perder demasiada capacidad predictiva.")}
               </li>
             </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="mt-8 rounded-2xl border border-amber-100 bg-gradient-to-r from-amber-50 via-white to-rose-50 p-6 shadow-sm">
+        <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-amber-700">Modulo interactivo</p>
+        <h2 className="mt-2 text-xl font-black text-slate-900">Simulador de overfitting vs underfitting</h2>
+        <p className="mt-2 text-sm text-slate-600">
+          Ajusta la complejidad del modelo para observar como cambian el error de entrenamiento y el de validacion.
+        </p>
+
+        <div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-[1.3fr_1fr]">
+          <div className="rounded-2xl border border-slate-200 bg-white p-5">
+            <label className="block text-xs font-bold uppercase tracking-wide text-slate-500">
+              Complejidad del modelo: {complexity}
+            </label>
+            <input
+              type="range"
+              min="1"
+              max="10"
+              step="1"
+              value={complexity}
+              onChange={(event) => setComplexity(Number(event.target.value))}
+              className="mt-3 w-full accent-amber-600"
+            />
+
+            <div className="mt-5 space-y-4">
+              <div>
+                <p className="mb-1 text-xs font-semibold text-slate-600">
+                  Error de entrenamiento: {(trainError * 100).toFixed(1)}%
+                </p>
+                <div className="h-3 rounded-full bg-slate-200">
+                  <div
+                    className="h-3 rounded-full bg-emerald-500"
+                    style={{ width: `${Math.round(trainError * 100)}%` }}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <p className="mb-1 text-xs font-semibold text-slate-600">
+                  Error de validacion: {(validationError * 100).toFixed(1)}%
+                </p>
+                <div className="h-3 rounded-full bg-slate-200">
+                  <div
+                    className="h-3 rounded-full bg-indigo-500"
+                    style={{ width: `${Math.round(validationError * 100)}%` }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className={`rounded-2xl border p-5 ${fittingState.box}`}>
+            <h3 className={`text-sm font-black ${fittingState.color}`}>{fittingState.title}</h3>
+            <p className={`mt-2 text-xs leading-relaxed ${fittingState.color}`}>
+              {fittingState.description}
+            </p>
+
+            <div className="mt-4 rounded-xl border border-white/80 bg-white/70 p-4">
+              <p className="text-[11px] font-bold uppercase tracking-wide text-slate-600">Lectura rapida</p>
+              <ul className="mt-2 list-disc space-y-2 pl-5 text-xs leading-relaxed text-slate-700">
+                <li>Si ambos errores son altos, el modelo necesita mas capacidad o mejores variables.</li>
+                <li>Si entrenamiento es muy bajo y validacion sube, hay sobreajuste.</li>
+                <li>El mejor punto busca error bajo y estable en validacion.</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
